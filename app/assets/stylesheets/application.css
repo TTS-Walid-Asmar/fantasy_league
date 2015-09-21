@@ -13,3 +13,8 @@
  *= require_tree .
  *= require_self
  */
+ $color1: #170d19; //rgba(23, 13, 25, 100)
+ $color2: #ed6568; //rgba(237, 101, 104, 100)
+ $color3: #64ee5c; //rgba(100, 238, 92, 100)
+ $color4: #edf3f2; //rgba(237, 243, 242, 100)
+ $color5: #edf398; //rgba(237, 243, 152, 100)
