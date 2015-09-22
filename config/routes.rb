@@ -1,4 +1,18 @@
 Rails.application.routes.draw do
+  get 'welcome/home'
+
+  get 'welcome/upcoming'
+
+  get 'welcome/live'
+
+  get 'welcome/history'
+
+  get 'welcome/contact'
+
+  get 'welcome/us'
+
+  get 'welcome/help'
+
   devise_for :users
   resources :charges
   # The priority is based upon order of creation: first created -> highest priority.
