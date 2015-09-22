@@ -5,16 +5,34 @@ Rails.application.routes.draw do
   resources :teams_players
   get 'team/submit_team' => 'teams#submit_team'
 
+  get 'welcome/add_funds'
+
   resources :leagues
   resources :players
   resources :teams
-  get 'welcome/home'
+  get 'welcome/home' => 'welcome#home'
 
-  get 'welcome/upcoming'
+  get 'home' => 'welcome#home'
+  
+  get 'index' => 'welcome#home'
 
-  get 'welcome/live'
+  root 'welcome#home'
+  
+  get 'welcome/upcoming' => 'welcome#upcoming'
 
-  get 'welcome/history'
+  get 'upcoming' => 'welcome#upcoming'
+
+  get 'welcome/live' => 'welcome#live'
+  
+  get 'live' => 'welcome#live'
+
+  get 'welcome/history' => 'welcome#history'
+  
+  get 'history' => 'welcome#history'
+  
+  get 'welcome/add_funds' => 'welcome#add_funds'
+  
+  get 'add_funds' => 'welcome#add_funds'
 
   get 'welcome/contact'
 
@@ -25,6 +43,10 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :charges
+  
+  
+  
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

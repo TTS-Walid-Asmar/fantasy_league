@@ -19,4 +19,12 @@ class WelcomeController < ApplicationController
 
   def help
   end
+  
+  def balance
+    @user = User.all  
+  end
+
+  def add_funds
+    
+  end
 end
