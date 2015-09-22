@@ -18,14 +18,20 @@ class TeamsPlayersController < ApplicationController
     @teams_player.team_id = params[:team_id]
     @teams_player.player_id = params[:player_id]
 
-    respond_to do |format|
-      if @teams_player.save
-        format.html { redirect_to @teams_player.team, notice: 'Teams player was successfully created.' }
-        format.json { render :show, status: :created, location: @teams_player }
-      else
-        format.html { render :new }
-        format.json { render json: @teams_player.errors, status: :unprocessable_entity }
+    if @teams_player.can_add?
+
+      respond_to do |format|
+        if @teams_player.save
+          format.html { redirect_to @teams_player.team}
+          format.json { render :show, status: :created, location: @teams_player }
+        else
+          format.html { render :new }
+          format.json { render json: @teams_player.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      flash[:notice] = "Sorry this player could not be added."
+      redirect_to @teams_player.team
     end
 
   end
@@ -75,13 +81,13 @@ class TeamsPlayersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_teams_player
-      @teams_player = TeamsPlayer.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_teams_player
+    @teams_player = TeamsPlayer.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def teams_player_params
-      params[:teams_player, :team_id, :player_id]
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def teams_player_params
+    params[:teams_player, :team_id, :player_id]
+  end
 end

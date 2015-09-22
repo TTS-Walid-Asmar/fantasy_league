@@ -1,5 +1,29 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
+  <% @team.players.each do |player| %>
+  <div class="col-md-2">
+    <div class="media">
+      <div class="media-left">
+        <a href="#">
+          <img class="media-object" src="..." alt="...">
+        </a>
+      </div>
+      <div class="media-body">
+        <h4 class="media-heading">
+          <span class="muted"><%= player.position %></span>
+          <span><%= player.name %></span></h4>
+        <p>
+          <b>PPG: </b><%= player.points_per_game %> <b>Score: </b><%= player.score %>
+        </p>
+      </div>
+    </div>
+  </div>
+<% end %>
+</div>
+<% if @league.upcoming? %>
+<%= link_to "Edit Team", team_path(@team), class: "btn btn-primary" %>
+<%= link_to "Leave League", team_path(@team), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-primary" %>
 
+<% end %>
 <p>
   <strong>Name:</strong>
   <%= @league.name %>
@@ -22,7 +46,7 @@
 
 <p>
   <strong>Start time:</strong>
-  <%= @league.start_time %>
+  <%= @league.start_time.strftime('%a %b %e %I:%M %p %Z') %>
 </p>
 
 <%= link_to 'Edit', edit_league_path(@league) %> |

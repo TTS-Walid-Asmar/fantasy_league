@@ -10,7 +10,13 @@ class TeamsController < ApplicationController
   # GET /teams/1
   # GET /teams/1.json
   def show
-    @players = Player.where.not(id: @team.player_ids)
+    @filter_term = params[:position]
+    @filter_term ||= "all"
+    if @filter_term == 'all'
+      @players = Player.where.not(id: @team.player_ids)
+    else
+      @players = Player.where(position: @filter_term.downcase)
+    end
     @my_players = @team.players
   end
 
@@ -59,9 +65,11 @@ class TeamsController < ApplicationController
   # DELETE /teams/1
   # DELETE /teams/1.json
   def destroy
+    @team.league.users.delete(current_user)
     @team.destroy
+
     respond_to do |format|
-      format.html { redirect_to teams_url, notice: 'Team was successfully destroyed.' }
+      format.html { redirect_to root_path, notice: 'Team was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -74,13 +82,13 @@ class TeamsController < ApplicationController
 
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_team
-      @team = Team.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_team
+    @team = Team.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def team_params
-      params.require(:team).permit(:name, :player1, :player2, :player3, :player4, :player5, :user)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def team_params
+    params.require(:team).permit(:name, :player1, :player2, :player3, :player4, :player5, :user)
+  end
 end
