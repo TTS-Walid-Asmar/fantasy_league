@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
 
 
+
+  post 'add_funds' => 'welcome#add_to_funds'
+  
   resources :leagues_users
   resources :teams_players
   get 'team/submit_team' => 'teams#submit_team'

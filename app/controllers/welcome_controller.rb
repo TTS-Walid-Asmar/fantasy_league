@@ -1,14 +1,18 @@
 class WelcomeController < ApplicationController
   def home
+    @user = User.all  
   end
 
   def upcoming
+     @user = User.all  
   end
 
   def live
+     @user = User.all  
   end
 
   def history
+    @user = User.all  
   end
 
   def contact
@@ -21,10 +25,15 @@ class WelcomeController < ApplicationController
   end
   
   def balance
-    @user = User.all  
-  end
-
-  def add_funds
     
   end
+
+  def add_to_funds
+    current_user.balance += params[:quantity].to_f
+    current_user.save
+    
+    redirect_to root_path
+  end
+  
+   
 end

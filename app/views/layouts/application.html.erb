@@ -13,7 +13,7 @@
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
     
-    
+    <link href="/images/favicon.ico" rel="icon" type="image/x-icon" />
     
     <link href='https://fonts.googleapis.com/css?family=Niconne' rel='stylesheet' type='text/css'>
     
@@ -75,11 +75,12 @@
 
                 </li>
                 <li class="user-balance">
-    							<div id="balance" class="balance-header" style="padding-top:25%;" ><%= number_to_currency 100.2345 %> | </div>
+    							<div id="balance" class="balance-header" style="padding-top:25%;" >
+    							  <%= number_to_currency current_user.balance %> | </div>
     
     						</li>
                 <li class='add_to_funds'>
-                    <a href=<%add_funds_path %>> <button type="button" class="btn btn-success btn-sm"%> add funds </button></a>
+                    <a href=<%=add_funds_path %>> <button type="button" class="btn btn-success btn-sm"%> add funds </button></a>
                  </li>
               </ul>
               
