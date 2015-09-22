@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @league.name %>
+</p>
+
+<p>
+  <strong>Cost:</strong>
+  <%= @league.cost %>
+</p>
+
+<p>
+  <strong>Max participants:</strong>
+  <%= @league.max_participants %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @league.status %>
+</p>
+
+<p>
+  <strong>Start time:</strong>
+  <%= @league.start_time %>
+</p>
+
+<%= link_to 'Edit', edit_league_path(@league) %> |
+<%= link_to 'Back', leagues_path %>

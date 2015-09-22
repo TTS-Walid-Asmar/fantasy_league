@@ -1,3 +1,10 @@
+/*lines 3 through 5 puts a red 1 pixel border around everything, so you can see what size stuff is, what size the containers are, etc.  very handy for figuring out why stuff is not lined up right.  */
+
+/** {*/
+/*    border: 1px solid red !important;*/
+/*}*/
+
+
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
@@ -13,8 +20,21 @@
  *= require_tree .
  *= require_self
  */
+.cant-see-me{
+    display: none;
+}
+
+.container {
+  background: rgba(255,255,255,0.8);
+}
+
  $color1: #170d19; //rgba(23, 13, 25, 100)
  $color2: #ed6568; //rgba(237, 101, 104, 100)
  $color3: #64ee5c; //rgba(100, 238, 92, 100)
  $color4: #edf3f2; //rgba(237, 243, 242, 100)
  $color5: #edf398; //rgba(237, 243, 152, 100)
+
+
+.fantasy_league-font{
+    font-family: 'Niconne', cursive;
+}

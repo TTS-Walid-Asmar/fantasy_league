@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: 
+  cost: 9.99
+  max_participants: 1
+  status: MyString
+  start_time: 2015-09-22 04:39:48
+
+two:
+  name: 
+  cost: 9.99
+  max_participants: 1
+  status: MyString
+  start_time: 2015-09-22 04:39:48
