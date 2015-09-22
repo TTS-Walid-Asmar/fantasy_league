@@ -1,6 +1,18 @@
-
+<% if flash[:notice] %>
+  <div class="alert alert-warning"><%= flash[:notice] %></div>
+<% end %>
 <div class="row">
+
   <div class="col-md-8">
+    <ul class="nav nav-tabs">
+      <li role="presentation" class="all"><%= link_to "All", team_path(id: @team, position: "all")%></li>
+      <li role="presentation" class="top"><%= link_to "Top", team_path(id: @team, position: "top")%></li>
+      <li role="presentation" class="jungler"><%= link_to "Jungler", team_path(id: @team, position: "jungler")%></li>
+      <li role="presentation" class="mid"><%= link_to "Mid", team_path(id: @team, position: "mid")%></li>
+      <li role="presentation" class="adc"><%= link_to "ADC", team_path(id: @team, position: "adc")%></li>
+      <li role="presentation" class="support"><%= link_to "Support", team_path(id: @team, position: "support")%></li>
+
+    </ul>
     <div class="table-responsive">
       <table class="table table-striped">
 
@@ -27,7 +39,7 @@
             <%= player.name %>
           </td>
           <td>
-            <%= player.position %>
+            <%= player.position.capitalize %>
           </td>
           <td>
             <%= player.points_per_game %>
@@ -85,7 +97,13 @@
       </tr>
       <% end %>
     </table>
-    <%= link_to "Enter", team_submit_team_path(id: @team.league.id), class: "btn btn-success" %>
+    <%= link_to "Enter", team_submit_team_path(id: @team.id), class: "btn btn-success" %>
   </div>
 
 </div>
+<script type="text/javascript">
+$(document).ready(function () {
+  $('.<%= @filter_term %>').addClass('active');
+});
+
+</script>

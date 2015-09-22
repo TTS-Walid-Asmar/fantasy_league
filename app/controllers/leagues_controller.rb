@@ -16,6 +16,8 @@ class LeaguesController < ApplicationController
       @team.league_id = @league.id
       @team.save
       redirect_to team_path(id: @team.id)
+    else
+      @team = Team.find_by(user_id: current_user.id, league_id: @league.id)
     end
   end
 
@@ -57,9 +59,7 @@ class LeaguesController < ApplicationController
       end
     end
   end
-  def submit_team
-    @team = Team.find(params[:team_id])
-  end
+
 
   # DELETE /leagues/1
   # DELETE /leagues/1.json
