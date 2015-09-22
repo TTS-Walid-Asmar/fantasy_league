@@ -1,5 +1,6 @@
 class LeaguesController < ApplicationController
   before_action :set_league, only: [:show, :edit, :update, :destroy]
+  before_action :user_drafted?, only: [:show]
 
   # GET /leagues
   # GET /leagues.json
@@ -10,6 +11,12 @@ class LeaguesController < ApplicationController
   # GET /leagues/1
   # GET /leagues/1.json
   def show
+    if !user_drafted?
+      @team = Team.new
+      @team.league_id = @league.id
+      @team.save
+      redirect_to team_path(id: @team.id)
+    end
   end
 
   # GET /leagues/new
@@ -61,14 +68,24 @@ class LeaguesController < ApplicationController
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_league
-      @league = League.find(params[:id])
-    end
+  def draft
+    @league = League.find(params[:league_id])
+    @players = Player.all
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def league_params
-      params.require(:league).permit(:name, :cost, :max_participants, :status, :start_time)
-    end
+  end
+
+  private
+
+  def user_drafted?
+    @league.users.include?(current_user)
+  end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_league
+    @league = League.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def league_params
+    params.require(:league).permit(:name, :cost, :max_participants, :status, :start_time)
+  end
 end

@@ -1,8 +1,9 @@
 class Player < ActiveRecord::Base
-    
-    belongs_to :team
+    has_many :teams_players
+    has_many :teams, through: :teams_players
+
     has_many :leagues
     has_many :users
-    
-    
+
+
 end

@@ -1,5 +1,5 @@
 class TeamsController < ApplicationController
-  before_action :set_team, only: [:show, :edit, :update, :destroy]
+  before_action :set_team, only: [:show, :edit, :update, :destroy, :add_player]
 
   # GET /teams
   # GET /teams.json
@@ -10,6 +10,8 @@ class TeamsController < ApplicationController
   # GET /teams/1
   # GET /teams/1.json
   def show
+    @players = Player.where.not(id: @team.player_ids)
+    @my_players = @team.players
   end
 
   # GET /teams/new
@@ -19,6 +21,9 @@ class TeamsController < ApplicationController
 
   # GET /teams/1/edit
   def edit
+    @player = Player.find(params[:player_id])
+    @team.players.delete(@player)
+    redirect_to @team
   end
 
   # POST /teams
@@ -60,6 +65,7 @@ class TeamsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

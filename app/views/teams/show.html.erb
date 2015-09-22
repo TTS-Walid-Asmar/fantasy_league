@@ -1,34 +1,83 @@
-<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @team.name %>
-</p>
+<div class="row">
+  <div class="col-md-8">
+    <div class="table-responsive">
+      <table class="table-striped">
 
-<p>
-  <strong>Player1:</strong>
-  <%= @team.player1 %>
-</p>
+        <tr>
+          <th>
+            Name
+          </th>
+          <th>
+            Position
+          </th>
+          <th>
+            PPG
+          </th>
+          <th>
+            Cost
+          </th>
+        </tr>
+        <% @players.each do |player|%>
+        <tr>
+          <td>
+            <%= player.name %>
+          </td>
+          <td>
+            <%= player.position %>
+          </td>
+          <td>
+            <%= player.points_per_game %>
+          </td>
+          <td>
+            <%= player.value %>
+          </td>
+          <td>
+            <%= link_to "Add Player", new_teams_player_path(team_id: @team.id, player_id: player.id) %>
+          </td>
 
-<p>
-  <strong>Player2:</strong>
-  <%= @team.player2 %>
-</p>
+        </tr>
+        <% end %>
+      </table>
+    </div>
 
-<p>
-  <strong>Player3:</strong>
-  <%= @team.player3 %>
-</p>
+  </div>
+  <div class="col-md-4">
+    <table class="table-striped">
 
-<p>
-  <strong>Player4:</strong>
-  <%= @team.player4 %>
-</p>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Position
+        </th>
+        <th>
+          PPG
+        </th>
+        <th>
+          Cost
+        </th>
+      </tr>
+      <% @my_players.each do |player|%>
+      <tr>
+        <td>
+          <%= player.name %>
+        </td>
+        <td>
+          <%= player.position %>
+        </td>
+        <td>
+          <%= player.points_per_game %>
+        </td>
+        <td>
+          <%= player.value %>
+        </td>
+        <td><%= link_to 'Remove', edit_team_path(id: @team.id, player_id: player.id) %></td>
 
-<p>
-  <strong>Player5:</strong>
-  <%= @team.player5 %>
-</p>
+      </tr>
+      <% end %>
+    </table>
+  </div>
 
-<%= link_to 'Edit', edit_team_path(@team) %> |
-<%= link_to 'Back', teams_path %>
+</div>
