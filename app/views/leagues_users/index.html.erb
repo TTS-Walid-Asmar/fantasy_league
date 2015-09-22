@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Leagues Users</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>League</th>
+      <th>User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @leagues_users.each do |leagues_user| %>
+      <tr>
+        <td><%= leagues_user.league_id %></td>
+        <td><%= leagues_user.user_id %></td>
+        <td><%= link_to 'Show', leagues_user %></td>
+        <td><%= link_to 'Edit', edit_leagues_user_path(leagues_user) %></td>
+        <td><%= link_to 'Destroy', leagues_user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Leagues user', new_leagues_user_path %>

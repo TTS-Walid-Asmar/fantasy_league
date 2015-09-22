@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>League:</strong>
+  <%= @leagues_user.league_id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @leagues_user.user_id %>
+</p>
+
+<%= link_to 'Edit', edit_leagues_user_path(@leagues_user) %> |
+<%= link_to 'Back', leagues_users_path %>

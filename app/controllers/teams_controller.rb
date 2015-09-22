@@ -1,5 +1,5 @@
 class TeamsController < ApplicationController
-  before_action :set_team, only: [:show, :edit, :update, :destroy]
+  before_action :set_team, only: [:show, :edit, :update, :destroy, :add_player, :submit_team]
 
   # GET /teams
   # GET /teams.json
@@ -10,6 +10,8 @@ class TeamsController < ApplicationController
   # GET /teams/1
   # GET /teams/1.json
   def show
+    @players = Player.where.not(id: @team.player_ids)
+    @my_players = @team.players
   end
 
   # GET /teams/new
@@ -19,6 +21,9 @@ class TeamsController < ApplicationController
 
   # GET /teams/1/edit
   def edit
+    @player = Player.find(params[:player_id])
+    @team.players.delete(@player)
+    redirect_to @team
   end
 
   # POST /teams
@@ -60,6 +65,13 @@ class TeamsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  def submit_team
+    @team.user = current_user
+    @team.save
+    redirect_to new_leagues_user_path(league_id: @team.league.id)
+
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -69,6 +81,6 @@ class TeamsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def team_params
-      params.require(:team).permit(:name, :player1, :player2, :player3, :player4, :player5)
+      params.require(:team).permit(:name, :player1, :player2, :player3, :player4, :player5, :user)
     end
 end

@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
 
- 
+
+  resources :leagues_users
+  resources :teams_players
+  get 'team/submit_team' => 'teams#submit_team'
 
   get 'welcome/add_funds'
 
@@ -36,7 +39,7 @@ Rails.application.routes.draw do
   get 'welcome/us'
 
   get 'welcome/help'
- 
+
   devise_for :users
 
   resources :charges
