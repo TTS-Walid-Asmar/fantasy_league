@@ -37,4 +37,16 @@
 
 .fantasy_league-font{
     font-family: 'Niconne', cursive;
+    font-size: 150%;
+    color: white;
+}
+
+
+.navbar{
+  background: $color1;
+  color: white;
+}
+
+.navbar-nav .navbar-default{
+  color: white !important;
 }
