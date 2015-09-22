@@ -1,9 +1,24 @@
 Rails.application.routes.draw do
+
  
 
   resources :leagues
   resources :players
   resources :teams
+  get 'welcome/home'
+
+  get 'welcome/upcoming'
+
+  get 'welcome/live'
+
+  get 'welcome/history'
+
+  get 'welcome/contact'
+
+  get 'welcome/us'
+
+  get 'welcome/help'
+ 
   devise_for :users
 
   resources :charges
