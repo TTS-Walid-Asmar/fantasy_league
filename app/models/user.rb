@@ -4,14 +4,16 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :leagues
+
   has_many :players
-  
+  has_many :leagues_users
+  has_many :leagues, through: :leagues_users
+
 
   def admin?
     role =="admin"
   end
-  
+
   def guest?
     role =="guest"
   end

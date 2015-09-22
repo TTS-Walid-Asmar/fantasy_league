@@ -1,5 +1,5 @@
 class TeamsController < ApplicationController
-  before_action :set_team, only: [:show, :edit, :update, :destroy, :add_player]
+  before_action :set_team, only: [:show, :edit, :update, :destroy, :add_player, :submit_team]
 
   # GET /teams
   # GET /teams.json
@@ -65,6 +65,12 @@ class TeamsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  def submit_team
+    @team.user = current_user
+    @team.save
+    redirect_to new_leagues_user_path(league_id: @team.league.id)
+
+  end
 
 
   private
@@ -75,6 +81,6 @@ class TeamsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def team_params
-      params.require(:team).permit(:name, :player1, :player2, :player3, :player4, :player5)
+      params.require(:team).permit(:name, :player1, :player2, :player3, :player4, :player5, :user)
     end
 end

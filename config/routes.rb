@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
 
 
+  resources :leagues_users
   resources :teams_players
-  get 'team/add_player' => 'teams#add_player'
+  get 'team/submit_team' => 'teams#submit_team'
 
   resources :leagues
   resources :players

@@ -57,6 +57,9 @@ class LeaguesController < ApplicationController
       end
     end
   end
+  def submit_team
+    @team = Team.find(params[:team_id])
+  end
 
   # DELETE /leagues/1
   # DELETE /leagues/1.json
@@ -66,12 +69,6 @@ class LeaguesController < ApplicationController
       format.html { redirect_to leagues_url, notice: 'League was successfully destroyed.' }
       format.json { head :no_content }
     end
-  end
-
-  def draft
-    @league = League.find(params[:league_id])
-    @players = Player.all
-
   end
 
   private
