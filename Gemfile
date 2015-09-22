@@ -1,17 +1,6 @@
 source 'https://rubygems.org'
 
 
-gem 'devise'
-
-gem 'cancancan'
-
-gem 'stripe'
-
-gem 'paperclip'
-
-gem 'figaro'
-
-gem 'awesome_print'
 
 
 
