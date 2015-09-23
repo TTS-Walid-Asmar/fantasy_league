@@ -1,2 +1,47 @@
-<h1>Welcome#home</h1>
-<p>Find me in app/views/welcome/home.html.erb</p>
+<div class="row">
+  <table class="table table-striped">
+    <tr>
+      <th>
+        League
+      </th>
+      <th>
+        Entries/Size
+      </th>
+      <th>
+        Fee
+      </th>
+      <th>
+        Prizes
+      </th>
+      <th>
+        Starts
+      </th>
+      <th>
+        Enter
+      </th>
+    </tr>
+    <% @leagues.each do |league| %>
+    <tr>
+      <td>
+        <%= league.name %>
+      </td>
+      <td>
+        <%= league.users.count %>/<%= league.max_participants %>
+      </td>
+      <td>
+        <%= number_to_currency league.cost %>
+      </td>
+      <td>
+        <%= league.prizes %>
+      </td>
+      <td>
+        <%= league.start_time.strftime('%a %b %e %I:%M %p %Z') %>
+      </td>
+      <td>
+        <%= link_to "Enter", league, class: "btn btn-primary" %>
+      </td>
+    </tr>
+    <% end %>
+  </table>
+
+</div>

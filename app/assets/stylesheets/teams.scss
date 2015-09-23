@@ -1,3 +1,24 @@
 // Place all the styles related to the Teams controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+span.muted {
+  font-size: 14px;
+}
+.skinny-col .col-md-6 {
+  padding: 0;
+  height: 50%;
+  text-align: right;
+}
+.skinny-col .col-md-6 h4{
+  padding: 0;
+  height: 50%;
+  text-align: right;
+  margin-bottom: 0;
+}
+.rounded-corners {
+  border: solid #ddd 1px;
+  border-radius: 6px !important;
+}
+caption {
+  background: #edf3f2;
+}

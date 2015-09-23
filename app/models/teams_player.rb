@@ -5,11 +5,11 @@ class TeamsPlayer < ActiveRecord::Base
 
   def can_add?
     team.players.each do |player1|
-      if player1.position == player.position
+      if player1.position.downcase == player.position.downcase
         return false
       end
-      return true
     end
+    return  true
   end
 
 end

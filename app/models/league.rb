@@ -7,5 +7,8 @@ class League < ActiveRecord::Base
     def upcoming?
       self.status == 'Upcoming'
     end
+    def prizes
+      total = 0.95*cost*max_participants
+    end
 
 end

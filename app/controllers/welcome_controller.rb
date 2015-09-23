@@ -1,18 +1,18 @@
 class WelcomeController < ApplicationController
   def home
-    @user = User.all  
+    @leagues = League.where(status: "Upcoming")
   end
 
   def upcoming
-     @user = User.all  
+     @leagues = current_user.leagues.where(status: "Upcoming")
   end
 
   def live
-     @user = User.all  
+     @leagues = current_user.leagues.where(status: "Live")
   end
 
   def history
-    @user = User.all  
+    @leagues = current_user.leagues.where(status: "Past")
   end
 
   def contact
@@ -23,17 +23,17 @@ class WelcomeController < ApplicationController
 
   def help
   end
-  
+
   def balance
-    
+
   end
 
   def add_to_funds
     current_user.balance += params[:quantity].to_f
     current_user.save
-    
+
     redirect_to root_path
   end
-  
-   
+
+
 end
