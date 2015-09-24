@@ -17,7 +17,7 @@
         Starts
       </th>
       <th>
-        Enter
+        Show
       </th>
     </tr>
     <% @leagues.each do |league| %>
@@ -38,7 +38,7 @@
         <%= league.start_time.strftime('%a %b %e %I:%M %p %Z') %>
       </td>
       <td>
-        <%= link_to "Enter", league, class: "btn btn-primary" %>
+        <%= link_to "Show", league, class: "btn btn-primary" %>
       </td>
     </tr>
     <% end %>

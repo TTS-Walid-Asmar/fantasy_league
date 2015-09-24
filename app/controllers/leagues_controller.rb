@@ -18,7 +18,9 @@ class LeaguesController < ApplicationController
       redirect_to team_path(id: @team.id)
     else
       @team = Team.find_by(user_id: current_user.id, league_id: @league.id)
+      @rankings = @league.rank_users_by_score
     end
+
   end
 
   # GET /leagues/new

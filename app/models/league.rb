@@ -10,5 +10,9 @@ class League < ActiveRecord::Base
     def prizes
       total = 0.95*cost*max_participants
     end
+    def rank_users_by_score
+      users.sort{|a, b| b.league_score(self) <=> a.league_score(self)}
+    end
+
 
 end

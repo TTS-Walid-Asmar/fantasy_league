@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-
+  has_many :teams
   has_many :players
   has_many :leagues_users
   has_many :leagues, through: :leagues_users
@@ -22,5 +22,10 @@ class User < ActiveRecord::Base
 
   has_attached_file :image, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
+  def league_score(league)
+    team = teams.find_by(league_id: league.id)
+    league_score = team.total_score
+  end
+  
 
 end

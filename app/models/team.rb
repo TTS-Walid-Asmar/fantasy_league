@@ -6,4 +6,11 @@ class Team < ActiveRecord::Base
     has_many :teams_players
     has_many :players, through: :teams_players
 
+    def total_score
+      team_score = 0
+      players.each do |player|
+        team_score += player.score
+      end
+      return team_score
+    end
 end

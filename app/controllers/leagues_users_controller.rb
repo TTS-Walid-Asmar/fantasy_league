@@ -14,17 +14,22 @@ class LeaguesUsersController < ApplicationController
 
   # GET /leagues_users/new
   def new
-    @leagues_user = LeaguesUser.new
-    @leagues_user.user = current_user
-    @leagues_user.league = League.find(params[:league_id])
+    @league = League.find(params[:league_id])
+    if @league.users.include?(current_user)
+      redirect_to @league
+    else
+      @leagues_user = LeaguesUser.new
+      @leagues_user.user = current_user
+      @leagues_user.league = @league
 
-    respond_to do |format|
-      if @leagues_user.save
-        format.html { redirect_to @leagues_user.league, notice: 'Leagues user was successfully created.' }
-        format.json { render :show, status: :created, location: @leagues_user }
-      else
-        format.html { render :new }
-        format.json { render json: @leagues_user.errors, status: :unprocessable_entity }
+      respond_to do |format|
+        if @leagues_user.save
+          format.html { redirect_to @league, notice: 'Leagues user was successfully created.' }
+          format.json { render :show, status: :created, location: @leagues_user }
+        else
+          format.html { render :new }
+          format.json { render json: @leagues_user.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -74,13 +79,13 @@ class LeaguesUsersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_leagues_user
-      @leagues_user = LeaguesUser.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_leagues_user
+    @leagues_user = LeaguesUser.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def leagues_user_params
-      params.require(:leagues_user).permit(:league_id, :user_id)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def leagues_user_params
+    params.require(:leagues_user).permit(:league_id, :user_id)
+  end
 end

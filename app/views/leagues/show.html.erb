@@ -1,4 +1,10 @@
 <div class="row">
+  <div class="col-md-9">
+    <h3>Your Team</h3>
+  </div>
+</div>
+
+<div class="row">
   <% @team.players.each do |player| %>
   <div class="col-md-2">
     <div class="media">
@@ -11,43 +17,96 @@
         <h4 class="media-heading">
           <span class="muted"><%= player.position %></span>
           <span><%= player.name %></span></h4>
-        <p>
-          <b>PPG: </b><%= player.points_per_game %> <b>Score: </b><%= player.score %>
-        </p>
+          <p>
+            <b>PPG: </b><%= player.points_per_game %> <b>Score: </b><%= player.score %>
+          </p>
+        </div>
       </div>
     </div>
+    <% end %>
+    <div class="col-md-2">
+      <% if @league.upcoming? %>
+      <%= link_to "Edit", team_path(@team), class: "btn btn-primary" %>
+      <% end %>
+    </div>
   </div>
-<% end %>
+
+  <div class="row">
+    <div class="col-md-12">
+
+
+
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-md-6">
+      <h3>League Info</h3>
+      <p>
+        <strong>Name:</strong>
+        <%= @league.name %>
+      </p>
+
+      <p>
+        <strong>Cost:</strong>
+        <%= @league.cost %>
+      </p>
+
+      <p>
+        <strong>Max participants:</strong>
+        <%= @league.max_participants %>
+      </p>
+
+      <p>
+        <strong>Status:</strong>
+        <%= @league.status %>
+      </p>
+
+      <p>
+        <strong>Start time:</strong>
+        <%= @league.start_time.strftime('%a %b %e %I:%M %p %Z') %>
+      </p>
+      <% if @league.upcoming? %>
+      <%= link_to "Leave", team_path(@team), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-primary" %>
+      <% end %>
+
+    </div>
+    <div class="col-md-6">
+      <h3>League Rankings</h3>
+      <div class="rounded-corners">
+        <table class="table table-hover">
+          <tr>
+            <th>
+              Ranking
+            </th>
+            <th>
+              Username
+            </th>
+            <th>
+              Score
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <% count = 0 %>
+          <% @rankings.each do |user| %>
+          <% count += 1 %>
+          <tr>
+            <td>
+              <%= count %>
+            </td>
+            <td>
+              <%= user.name %>
+            </td>
+            <td>
+              <%= user.league_score(@league) %>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
 </div>
-<% if @league.upcoming? %>
-<%= link_to "Edit Team", team_path(@team), class: "btn btn-primary" %>
-<%= link_to "Leave League", team_path(@team), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-primary" %>
-
-<% end %>
-<p>
-  <strong>Name:</strong>
-  <%= @league.name %>
-</p>
-
-<p>
-  <strong>Cost:</strong>
-  <%= @league.cost %>
-</p>
-
-<p>
-  <strong>Max participants:</strong>
-  <%= @league.max_participants %>
-</p>
-
-<p>
-  <strong>Status:</strong>
-  <%= @league.status %>
-</p>
-
-<p>
-  <strong>Start time:</strong>
-  <%= @league.start_time.strftime('%a %b %e %I:%M %p %Z') %>
-</p>
-
-<%= link_to 'Edit', edit_league_path(@league) %> |
-<%= link_to 'Back', leagues_path %>
