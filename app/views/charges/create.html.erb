@@ -1,1 +1,2 @@
-<h2>You just added $<strong><%= (@amount.to_f.round(2) / 100) %></strong> to your account!</h2>
+<h2>You just added <strong><%= number_to_currency (@amount.to_f.round(2) / 100) %></strong> to your account!</h2>
+<p>May the odds be ever in your favor!</p>
