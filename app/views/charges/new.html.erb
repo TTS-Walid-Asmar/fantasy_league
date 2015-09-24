@@ -1,0 +1,17 @@
+<%= form_tag charges_path do %>
+  <br>
+  amount to add: $<%= @amount %>
+  <br>
+  <div class="cant-see-me">
+    <%= number_field_tag :amount, @amount %>
+  </div>
+  <script 
+          src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+          data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+          data-description=  "Adding Funds!"
+          
+          data-amount= <%= (@amount.to_f.round(2) * 100).to_i %>
+          data-locale="auto">
+    
+  </script>
+<% end %>
