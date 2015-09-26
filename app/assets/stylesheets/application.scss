@@ -58,5 +58,45 @@
 }
 
 .navbar-default .navbar-nav  > li > a{
-  color: white !important;
+  color: white;
 }
+
+.navbar-default .navbar-nav .open .dropdown-menu>li>a, .navbar-default .navbar-nav .open .dropdown-menu {
+    background-color: $light-red;
+    color: #ffffff;
+  }
+  
+.navbar-default .navbar-nav > li > a:hover {
+    background-color: $light-red;
+    color:#ffffff;
+}  
+
+.navbar-default .navbar-nav > .active > a, 
+.navbar-default .navbar-nav > .active > a:hover, 
+.navbar-default .navbar-nav > .active > a:focus {
+    background-color: $light-red;
+    color:#ffffff;    // Changes color of main button that is currently active.
+}
+
+.navbar-default .navbar-nav > .open > a, 
+.navbar-default .navbar-nav > .open > a:hover, 
+.navbar-default .navbar-nav > .open > a:focus {
+    color: $color-black;
+    background-color: $light-gray;  //  Changes color of main menu button once clicked.
+}
+
+.navbar-default .navbar-nav .open .dropdown-menu>li>a:hover, 
+.navbar-default .navbar-nav .open .dropdown-menu>li>a:focus {
+    background-color: $light-red;
+    color: $color-black;    // Changes color of the text when the dropdown-menu is highlighted
+  }
+  
+.navbar-default .nav .dropdown .dropdown-menu {
+    -webkit-border-radius: 5px 5px 5px 5px ;
+    -moz-border-radius: 5px 5px 5px 5px ;
+    border-radius: 5px 5px 5px 5px ;    
+    margin-top: -3px;
+    margin-left: 0px;
+    border: none;
+
+}  

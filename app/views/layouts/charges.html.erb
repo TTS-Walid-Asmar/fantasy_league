@@ -78,11 +78,14 @@
                 <% end %>
               </li>
               <li role="separator" class="divider"></li>
-              <li><%= link_to 'Sign Out', destroy_user_session_path, :method => :delete %></li>
+              <li><%= link_to destroy_user_session_path, method: :delete do %>
+                  Sign Out <i class="glyphicon glyphicon-log-out"></i>
+                <% end %>
+               </li>
             </ul>
           </li>
           <li><a href="#">|</a></li>
-          <li><a href="#"><%= number_to_currency current_user.balance %></a></li>
+          <li><a href= <%= new_charge_path + "?amount=50" %>><%= number_to_currency current_user.balance %></a></li>
           <!-- <li class="user-balance">
             <div id="balance" class="balance-header" style="padding-top:25%;" >
               <%= number_to_currency current_user.balance %> | </div>
@@ -141,15 +144,12 @@
   <% end %>
 
 
-  <div class="col-md-2">
-  </div>
-  <div class="col-md-8"></div>
+
   <div class="container">
     <%= yield %>
   </div>
 </div>
-<div class="col-md-2">
-</div>
+
 
 
 </body>
