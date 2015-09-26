@@ -1,2 +1,11 @@
-<h2>You just added <strong><%= number_to_currency (@amount.to_f.round(2) / 100) %></strong> to your account!</h2>
-<p>May the odds be ever in your favor!</p>
+<center>
+    <h1><div style="color: green;"><i class="glyphicon glyphicon-ok-sign">Huzzah!</i></div></h1>
+    <h2>You just added <strong><%= number_to_currency (@amount.to_f.round(2) / 100) %></strong> to your account!</h2>
+    <h3>Current Balance: <strong><%= number_to_currency current_user.balance %></strong></h3>
+    <p>May the odds be ever in your favor!</p>
+    
+    
+  
+    <%= link_to 'Continue', root_path, class:"btn btn-success"%> 
+    
+</center>

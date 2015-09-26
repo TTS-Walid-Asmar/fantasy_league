@@ -13,7 +13,7 @@
   <!-- Optional theme -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
 
-  <link href="/images/favicon.ico" rel="icon" type="image/x-icon" />
+  <link href="/images/favicon(1).ico" rel="icon" type="image/x-icon" />
 
   <link href='https://fonts.googleapis.com/css?family=Niconne' rel='stylesheet' type='text/css'>
 
@@ -77,12 +77,20 @@
                   Edit Profile <i class="glyphicon glyphicon-edit"></i>
                 <% end %>
               </li>
+              <li><%= link_to how_path do %>
+                  How Does This Work?<i class="glyphicon glyphicon-question-sign"></i>
+                <% end %>
+                
+              </li>
               <li role="separator" class="divider"></li>
-              <li><%= link_to 'Sign Out', destroy_user_session_path, :method => :delete %></li>
+              <li><%= link_to destroy_user_session_path, method: :delete do %>
+                  Sign Out <i class="glyphicon glyphicon-log-out"></i>
+                <% end %>
+               </li>
             </ul>
           </li>
           <li><a href="#">|</a></li>
-          <li><a href="#"><%= number_to_currency current_user.balance %></a></li>
+          <li><a href= <%= new_charge_path + "?amount=50" %>><%= number_to_currency current_user.balance %></a></li>
           <!-- <li class="user-balance">
             <div id="balance" class="balance-header" style="padding-top:25%;" >
               <%= number_to_currency current_user.balance %> | </div>
@@ -116,7 +124,13 @@
       </div><!-- /.container-fluid -->
     </nav>
 
+          <div class="container">
+            <%= yield %>
+          </div>
+
+
     <% else %>
+    <!--not logged in-->
     <nav class="navbar navbar-default">
       <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -135,21 +149,37 @@
         </div>
         <%= link_to "Sign Up", new_user_registration_path, class: "navbar-brand" %>
 
-      </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-  </nav>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+    
+    <div class="row">
+      <div class="col-md-1">
+        &nbsp
+      </div> 
+            
+        <div class="col-md-3">
+        <%= image_tag "gold-man-copyright2.gif",  alt: "graphic of one of our customers surrounded by all the gold he has won here" %>
+        <h2><p>Win cash, daily!</p></h2>
+        <h3><p>If you want to win, you no longer have to play the game, just bet on those that do!</p></h3>
+      </div>
+      <div class="col-md-7">
+        <%= yield %>
+      </div>
+      
+      <div class="col-md-1">
+        &nbsp
+      </div> 
+      
+    </div>
+
   <% end %>
 
 
-  <div class="col-md-2">
-  </div>
-  <div class="col-md-8"></div>
-  <div class="container">
-    <%= yield %>
-  </div>
-</div>
-<div class="col-md-2">
-</div>
+
+
+
+
 
 
 </body>

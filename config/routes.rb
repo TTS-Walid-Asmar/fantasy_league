@@ -21,6 +21,10 @@ Rails.application.routes.draw do
 
   root 'welcome#home'
   
+  get 'how' => 'welcome#how'
+  
+  get "terms" => "welcome#terms"
+  
   get 'welcome/upcoming' => 'welcome#upcoming'
 
   get 'upcoming' => 'welcome#upcoming'

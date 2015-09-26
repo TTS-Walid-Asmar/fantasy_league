@@ -1,6 +1,12 @@
+<h1>Add additional funds to your account</h1>
+<p>
+    Current Balance: <strong><%= number_to_currency current_user.balance %></strong>
+</p>
+<p>To play Fantasy League you need to add funds to your account. Don't worry, you can withdraw your money at any time for free.  How much would you like to add? </p>
+<p>    
+
 <%= form_tag charges_path do %>
-  <br>
-  amount to add: $<%= @amount %>
+  <strong>$<%= @amount %></strong>
   <br>
   <div class="cant-see-me">
     <%= number_field_tag :amount, @amount %>
@@ -15,3 +21,6 @@
     
   </script>
 <% end %>
+<br>
+<p>If this is not correct, please click on cancel:</p>
+<%= link_to 'Cancel', root_path, class:"btn btn-danger"%> 
