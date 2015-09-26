@@ -37,6 +37,7 @@ gem 'cancancan'
 gem 'figaro'
 gem 'paperclip'
 gem 'awesome_print'
+gem 'httparty'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 group :development do

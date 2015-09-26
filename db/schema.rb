@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150922162208) do
+ActiveRecord::Schema.define(version: 20150926185156) do
+
+  create_table "fantasy_stats", force: :cascade do |t|
+    t.text "fant_stats"
+    t.text "tournaments"
+    t.text "players"
+    t.text "player_data"
+  end
 
   create_table "leagues", force: :cascade do |t|
     t.string   "name"
@@ -25,6 +32,8 @@ ActiveRecord::Schema.define(version: 20150922162208) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+    t.text     "games"
+    t.text     "player_list"
   end
 
   create_table "leagues_users", force: :cascade do |t|
