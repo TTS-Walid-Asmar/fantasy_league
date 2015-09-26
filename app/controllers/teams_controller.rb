@@ -75,6 +75,8 @@ class TeamsController < ApplicationController
   def submit_team
     @team.user = current_user
     @team.save
+    current_user.balance -= @team.league.cost
+    current_user.save
     redirect_to new_leagues_user_path(league_id: @team.league.id)
 
   end
