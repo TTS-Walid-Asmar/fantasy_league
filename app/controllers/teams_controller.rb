@@ -10,12 +10,14 @@ class TeamsController < ApplicationController
   # GET /teams/1
   # GET /teams/1.json
   def show
-    @filter_term = params[:position]
-    @filter_term ||= "all"
-    @players = Player.where.not(id: @team.player_ids)
-    if @filter_term != 'all'
-      @players = @players.where(position: @filter_term.downcase)
-    end
+    @players = @team.league.player_list
+    @playernames = FantasyStat.first.find_player_names(@players)
+    # @filter_term = params[:position]
+    # @filter_term ||= "all"
+    # @players = Player.where.not(id: @team.player_ids)
+    # if @filter_term != 'all'
+    #   @players = @players.where(position: @filter_term.downcase)
+    # end
     @my_players = @team.players
   end
 

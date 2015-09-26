@@ -3,6 +3,8 @@ class League < ActiveRecord::Base
     has_many :teams
     has_many :leagues_users
     has_many :users, through: :leagues_users
+    serialize :games, Array
+    serialize :player_list, Array
 
     def upcoming?
       self.status == 'Upcoming'
