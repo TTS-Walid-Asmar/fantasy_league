@@ -77,6 +77,11 @@
                   Edit Profile <i class="glyphicon glyphicon-edit"></i>
                 <% end %>
               </li>
+              <li><%= link_to how_path do %>
+                  How Does This Work?<i class="glyphicon glyphicon-question-sign"></i>
+                <% end %>
+                
+              </li>
               <li role="separator" class="divider"></li>
               <li><%= link_to destroy_user_session_path, method: :delete do %>
                   Sign Out <i class="glyphicon glyphicon-log-out"></i>
