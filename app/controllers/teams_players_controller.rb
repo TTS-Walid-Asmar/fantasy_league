@@ -14,15 +14,18 @@ class TeamsPlayersController < ApplicationController
 
   # GET /teams_players/new
   def new
-    @teams_player = TeamsPlayer.new
-    @teams_player.team_id = params[:team_id]
-    @teams_player.player_id = params[:player_id]
 
-    if @teams_player.can_add?
+    @team = Team.find(params[:team_id])
+    @player_id = params[:player_id].to_i
+
+
+
+    if @team.can_add?(@player_id)
+      @team.player_list.push(@player_id)
 
       respond_to do |format|
-        if @teams_player.save
-          format.html { redirect_to @teams_player.team}
+        if @team.save
+          format.html { redirect_to @team }
           format.json { render :show, status: :created, location: @teams_player }
         else
           format.html { render :new }
@@ -31,7 +34,7 @@ class TeamsPlayersController < ApplicationController
       end
     else
       flash[:notice] = "Sorry this player could not be added."
-      redirect_to @teams_player.team
+      redirect_to @team
     end
 
   end

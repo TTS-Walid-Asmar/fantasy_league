@@ -2,7 +2,6 @@
 <div class="alert alert-warning"><%= flash[:notice] %></div>
 <% end %>
 <div class="row">
-
   <div class="col-md-6">
     <ul class="nav nav-tabs">
       <li role="presentation" class="all"><%= link_to "All", team_path(id: @team, position: "all")%></li>
@@ -36,10 +35,22 @@
         </thead>
 
         <tbody>
-          <% @playernames.each do |name| %>
+          <% @players.each_index do |index| %>
           <tr>
             <td>
-              <%= name %>
+              <%= @playernames[index] %>
+            </td>
+            <td>
+              <%= @player_roles[index] %>
+            </td>
+            <td>
+              <%= @player_ppg[index] %>
+            </td>
+            <td>
+              <%= number_to_currency(@player_costs[index], precision: 0) %>
+            </td>
+            <td>
+              <%= link_to "Add", new_teams_player_path(player_id: @players[index], team_id: @team.id) %>
             </td>
           </tr>
           <% end %>
@@ -88,21 +99,21 @@
           </tr>
         </thead>
         <tbody>
-          <% @my_players.each do |player|%>
+          <% @my_players.each_index do |index|%>
           <tr>
             <td>
-              <%= player.name %>
+              <%= @my_playernames[index] %>
             </td>
             <td>
-              <%= player.position.capitalize %>
+              <%= @my_player_roles[index] %>
             </td>
             <td>
-              <%= player.points_per_game %>
+              <%= @my_player_ppg[index] %>
             </td>
             <td>
-              <%= number_to_currency player.value %>
+              <%= number_to_currency @my_player_costs[index] %>
             </td>
-            <td><%= link_to 'Remove', edit_team_path(id: @team.id, player_id: player.id) %></td>
+            <td><%= link_to 'Remove', edit_team_path(id: @team.id, player_id: @my_players[index]) %></td>
 
           </tr>
           <% end %>
@@ -110,8 +121,9 @@
 
       </table>
     </div>
-
-    <%= link_to "Enter", team_submit_team_path(id: @team.id), class: "btn btn-success" %>
+    <% if @my_players.size == 5 %>
+      <%= link_to "Enter", team_submit_team_path(id: @team.id), class: "btn btn-success" %>
+    <% end %>
   </div>
 
 </div>

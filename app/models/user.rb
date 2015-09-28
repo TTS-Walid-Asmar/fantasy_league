@@ -26,6 +26,6 @@ class User < ActiveRecord::Base
     team = teams.find_by(league_id: league.id)
     league_score = team.total_score
   end
-  
+
 
 end

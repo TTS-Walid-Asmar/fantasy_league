@@ -5,26 +5,23 @@
 </div>
 
 <div class="row">
-  <% @team.players.each do |player| %>
+  <% @team.player_list.each_index do |index| %>
   <div class="col-md-2">
     <div class="media">
-      <div class="media-left">
-        <a href="#">
-          <img class="media-object" src="..." alt="...">
-        </a>
-      </div>
       <div class="media-body">
+        <img class="media-object img-responsive" src="<%= @team_pics[index] %> " alt="...">
         <h4 class="media-heading">
-          <span class="muted"><%= player.position %></span>
-          <span><%= player.name %></span></h4>
+          <span class="muted"><%= @team_roles[index] %></span>
+          <span><%= @team_names[index] %></span></h4>
           <p>
-            <b>PPG: </b><%= player.points_per_game %> <b>Score: </b><%= player.score %>
+            <b>Score: </b><span><%= @team_player_scores["#{@team.player_list[index]}"]['score'].round(1) %></span>
           </p>
         </div>
       </div>
     </div>
     <% end %>
     <div class="col-md-2">
+
       <% if @league.upcoming? %>
       <%= link_to "Edit", team_path(@team), class: "btn btn-primary" %>
       <% end %>

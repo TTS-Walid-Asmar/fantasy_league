@@ -11,13 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150926185156) do
+ActiveRecord::Schema.define(version: 20150928160843) do
 
   create_table "fantasy_stats", force: :cascade do |t|
     t.text "fant_stats"
     t.text "tournaments"
     t.text "players"
     t.text "player_data"
+    t.text "ppg"
   end
 
   create_table "leagues", force: :cascade do |t|
@@ -34,6 +35,7 @@ ActiveRecord::Schema.define(version: 20150926185156) do
     t.datetime "image_updated_at"
     t.text     "games"
     t.text     "player_list"
+    t.integer  "tournament_id"
   end
 
   create_table "leagues_users", force: :cascade do |t|
@@ -72,6 +74,7 @@ ActiveRecord::Schema.define(version: 20150926185156) do
     t.datetime "image_updated_at"
     t.integer  "league_id"
     t.integer  "user_id"
+    t.text     "player_list"
   end
 
   create_table "teams_players", force: :cascade do |t|
