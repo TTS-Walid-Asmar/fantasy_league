@@ -1,35 +1,36 @@
 <p id="notice"><%= notice %></p>
-
-<h1>Listing Leagues</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Cost</th>
-      <th>Max participants</th>
-      <th>Status</th>
-      <th>Start time</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @leagues.each do |league| %>
+<% if can? :manage, League %>
+  <h1>Listing Leagues</h1>
+  
+  <table>
+    <thead>
       <tr>
-        <td><%= league.name %></td>
-        <td><%= league.cost %></td>
-        <td><%= league.max_participants %></td>
-        <td><%= league.status %></td>
-        <td><%= league.start_time %></td>
-        <td><%= link_to 'Show', league %></td>
-        <td><%= link_to 'Edit', edit_league_path(league) %></td>
-        <td><%= link_to 'Destroy', league, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>Name</th>
+        <th>Cost</th>
+        <th>Max participants</th>
+        <th>Status</th>
+        <th>Start time</th>
+        <th colspan="3"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New League', new_league_path %>
+    </thead>
+  
+    <tbody>
+      <% @leagues.each do |league| %>
+        <tr>
+          <td><%= league.name %></td>
+          <td><%= league.cost %></td>
+          <td><%= league.max_participants %></td>
+          <td><%= league.status %></td>
+          <td><%= league.start_time %></td>
+          <td><%= link_to 'Show', league %></td>
+          <td><%= link_to 'Edit', edit_league_path(league) %></td>
+          <td><%= link_to 'Destroy', league, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  
+  <br>
+  
+  <%= link_to 'New League', new_league_path %>
+<% end %>

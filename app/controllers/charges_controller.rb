@@ -1,4 +1,9 @@
 class ChargesController < ApplicationController
+
+  layout "application"
+  # similar to the case in application controller, you could assign a method instead
+
+  
   def new
      @amount = params[:amount]
   end

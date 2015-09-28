@@ -6,7 +6,7 @@ class Ability
     
     
     if user.admin?
-      can :manage, Player, Team, League
+      can :manage, :all
     elsif user.guest?
       can :show, Player, Team, League
     end

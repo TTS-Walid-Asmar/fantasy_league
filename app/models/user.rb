@@ -2,13 +2,28 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
-
+         :recoverable, :rememberable, :trackable, :validatable, :confirmable
+  
+  extend FriendlyId
+  friendly_id :slug_candidates, use: :slugged
+      
+      def slug_candidates
+      [
+        :title,
+        [:title, :user_id],
+      ]
+    end
+  
   has_many :teams
   has_many :players
   has_many :leagues_users
   has_many :leagues, through: :leagues_users
 
+  def send_welcome_email
+  
+    UserMailer.send
+  
+  end
 
   def admin?
     role =="admin"

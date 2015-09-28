@@ -28,7 +28,7 @@ class TeamsController < ApplicationController
 
   # GET /teams/1/edit
   def edit
-    @player = Player.find(params[:player_id])
+    @player = Player.friendly.find(params[:player_id])
     @team.players.delete(@player)
     redirect_to @team
   end
@@ -87,7 +87,7 @@ class TeamsController < ApplicationController
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_team
-    @team = Team.find(params[:id])
+    @team = Team.friendly.find(params[:id])
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

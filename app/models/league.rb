@@ -5,7 +5,17 @@ class League < ActiveRecord::Base
     has_many :users, through: :leagues_users
     serialize :games, Array
     serialize :player_list, Array
-
+  
+  extend FriendlyId
+  friendly_id :slug_candidates, use: :slugged
+      
+      def slug_candidates
+      [
+        :name,
+        [:name, :id],
+      ]
+    end
+  
     def upcoming?
       self.status == 'Upcoming'
     end

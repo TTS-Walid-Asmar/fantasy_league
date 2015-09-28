@@ -1,5 +1,36 @@
-<p>Welcome <%= @email %>!</p>
+<h1>Welcome to Fantasy League, <%= @user.name %>!</h1>
+<p>
+    You have almost successfully signed up to Fantasy League, the number one website for gambling on League of Legends!
+</p>
+<p>
+Thank you for joining our site.   There is one more step to be set up completely.  
+</p>
+<p>
+You can confirm your account email through the link below, then login and get to gamblin'!  :) 
+</p>
+<p>(If you did not setup an account on Fantasy League then don't click this link.  You should probably just delelte this email and go about the rest of your day.  Or possibly check with your spouse and/or children (or maybe even your parents or a sibling) as they may have signed up and used your email address.)</p>
+<p><%= link_to 'Confirm my account', confirmation_url(@resource, :confirmation_token => @token) %></p>
+<p>
+    Here is the information you used to sign up with us, you may want to write this down somewhere, or remember it:
+</p>
+<p>
+    Your username will be: <%= @user.username %><br>
+    Your email address is; <%= @user.email %> <br>
+    Hopefully you remember your password, because we've already encrypted it, so we can't display it for you.  Also that would be pretty unsecure, so you wouldn't want us to do that anyway.<br>
+    To login to our site, just follow this link: <%= @url %> <br>
+</p>
+<h2>How to Play:</h2>
+<ol>
+    
+<li>CHOOSE A CONTEST<br>
+Fantasy League is different than other fantasy sports sites because our games, Leagues, last just one day. From the home page choose the League you'd like to enter. You can enter as many games and teams as you like to increase your chances of winning.</il>
+<li>PICK YOUR TEAM<br>
+Once you've chosen your League you'll need to pick your ultimate fantasy team for that day's games. All you need to do is stay under the salary cap and watch your chosen players destroy the competition.</li>
 
-<p>You can confirm your account email through the link below:</p>
+<li>SCORE THE MOST POINTS & WIN<br>
+Once the games start, your players accumulate points based on how they perform. If your team racks up more than your rivals on that day you’ll instantly take home the winnings. No waiting for the season to end. </li>
 
-<p><%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token) %></p>
+<li>PLAY ANYWHERE<br>
+Join Leagues and draft your teams easily from your phone, tablet or computer. Make last minute edits and replacements or track your Team's performance wherever you are.</li>
+</ol>
+<p>May the odds be ever in your favor! </p>
