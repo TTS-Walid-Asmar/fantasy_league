@@ -10,15 +10,24 @@ class TeamsController < ApplicationController
   # GET /teams/1
   # GET /teams/1.json
   def show
-    @players = @team.league.player_list
-    @playernames = FantasyStat.first.find_player_names(@players)
+    @my_players = @team.player_list
+    @players = @team.league.player_list.reject {|player_id| @my_players.include?(player_id)}
+
+    @playernames = FantasyStat.last.find_player_names(@players)
+    @player_roles = FantasyStat.last.find_player_roles(@players)
+    @player_ppg = FantasyStat.last.find_player_ppgs(@players)
+    @player_costs = FantasyStat.last.find_player_costs(@player_ppg)
     # @filter_term = params[:position]
     # @filter_term ||= "all"
     # @players = Player.where.not(id: @team.player_ids)
     # if @filter_term != 'all'
     #   @players = @players.where(position: @filter_term.downcase)
     # end
-    @my_players = @team.players
+
+    @my_playernames = FantasyStat.last.find_my_player_names(@my_players)
+    @my_player_roles = FantasyStat.last.find_player_roles(@my_players)
+    @my_player_ppg = FantasyStat.last.find_player_ppgs(@my_players)
+    @my_player_costs = FantasyStat.last.find_player_costs(@my_player_ppg)
   end
 
   # GET /teams/new
@@ -28,8 +37,11 @@ class TeamsController < ApplicationController
 
   # GET /teams/1/edit
   def edit
-    @player = Player.friendly.find(params[:player_id])
-    @team.players.delete(@player)
+
+    @player_id = params[:player_id].to_i
+    @team.player_list.delete(@player_id)
+    @team.save
+
     redirect_to @team
   end
 

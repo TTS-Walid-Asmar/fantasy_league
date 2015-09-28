@@ -11,13 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150928152619) do
+
+ActiveRecord::Schema.define(version: 20150928160843) do
+
 
   create_table "fantasy_stats", force: :cascade do |t|
     t.text "fant_stats"
     t.text "tournaments"
     t.text "players"
     t.text "player_data"
+    t.text "ppg"
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -48,6 +51,8 @@ ActiveRecord::Schema.define(version: 20150928152619) do
     t.text     "games"
     t.text     "player_list"
     t.string   "slug"
+    t.integer  "tournament_id"
+
   end
 
   add_index "leagues", ["slug"], name: "index_leagues_on_slug", unique: true
@@ -92,6 +97,8 @@ ActiveRecord::Schema.define(version: 20150928152619) do
     t.integer  "league_id"
     t.integer  "user_id"
     t.string   "slug"
+    t.text     "player_list"
+
   end
 
   add_index "teams", ["slug"], name: "index_teams_on_slug", unique: true
