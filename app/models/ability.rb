@@ -8,7 +8,9 @@ class Ability
     if user.admin?
       can :manage, :all
     elsif user.guest?
-      can :show, Player, Team, League
+      can :show, Player
+      can :show, Team
+      can :show, League
     end
 
     # Define abilities for the passed in user here. For example:

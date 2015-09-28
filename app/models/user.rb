@@ -9,8 +9,8 @@ class User < ActiveRecord::Base
       
       def slug_candidates
       [
-        :title,
-        [:title, :user_id],
+        :name,
+        [:name, :id],
       ]
     end
   
