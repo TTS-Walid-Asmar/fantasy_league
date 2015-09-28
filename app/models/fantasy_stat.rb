@@ -63,7 +63,7 @@ class FantasyStat < ActiveRecord::Base
         league.games = game_list.slice!(0..10)
         league.status = "Upcoming"
         league.max_participants = rand(1000)
-        league.cost = rand(100)
+        league.cost = rand(0..100)
         league.player_list = create_player_list_and_ppg(tourney, league.games)
         league.name = "Test"
         league.save
