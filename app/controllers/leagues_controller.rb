@@ -14,9 +14,10 @@ class LeaguesController < ApplicationController
     if !user_drafted?
       @team = Team.new
       @team.name = current_user.name + @league.name
+
       @team.league_id = @league.id
       @team.save
-      redirect_to team_path(id: @team.id)
+      redirect_to @team
     else
       @team = Team.find_by(user_id: current_user.id, league_id: @league.id)
       @team_names = FantasyStat.last.find_player_names(@team.player_list)

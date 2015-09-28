@@ -74,120 +74,121 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%=current_user.name %><span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li><%= link_to edit_user_registration_path do %>
-                  Edit Profile <i class="glyphicon glyphicon-edit"></i>
+                Edit Profile <i class="glyphicon glyphicon-edit"></i>
                 <% end %>
               </li>
               <li><%= link_to how_path do %>
-                  How Does This Work?<i class="glyphicon glyphicon-question-sign"></i>
+                How Does This Work?<i class="glyphicon glyphicon-question-sign"></i>
                 <% end %>
-                
+
               </li>
-              
+
               <!--if the user is an admin, then have access to admin-ish stuff-->
               <% if can? :manage, Player, Team, League %>
-                <li role="separator" class="divider"></li>
-                <li><%= link_to "Create League", new_league_path %></li>
-                <li><%= link_to "Create Team", new_team_path %></li>
-                <li><%= link_to "Create Player", new_player_path %></li>
-                <li role="separator" class="divider"></li>
-                <li><%= link_to "Edit Leagues", leagues_path %></li>
-                <li><%= link_to "Edit Teams", teams_path %></li>
-                <li><%= link_to "Edit Players", players_path %></li>
+              <li role="separator" class="divider"></li>
+              <li><%= link_to "Create League", new_league_path %></li>
+              <li><%= link_to "Create Team", new_team_path %></li>
+              <li><%= link_to "Create Player", new_player_path %></li>
+              <li role="separator" class="divider"></li>
+              <li><%= link_to "Edit Leagues", leagues_path %></li>
+              <li><%= link_to "Edit Teams", teams_path %></li>
+              <li><%= link_to "Edit Players", players_path %></li>
               <% end %>
-              
-              
+
+
               <li role="separator" class="divider"></li>
               <li><%= link_to destroy_user_session_path, method: :delete do %>
-                  Sign Out <i class="glyphicon glyphicon-log-out"></i>
+                Sign Out <i class="glyphicon glyphicon-log-out"></i>
                 <% end %>
-               </li>
+              </li>
             </ul>
           </li>
           <li><a href="#">|</a></li>
           <li><a href= <%= new_charge_path + "?amount=50" %>><%= number_to_currency current_user.balance %></a></li>
           <!-- <li class="user-balance">
-            <div id="balance" class="balance-header" style="padding-top:25%;" >
-              <%= number_to_currency current_user.balance %> | </div>
+          <div id="balance" class="balance-header" style="padding-top:25%;" >
+          <%= number_to_currency current_user.balance %> | </div>
 
-            </li> -->
-                           <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Add Funds <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                      <li><a href= <%= new_charge_path + "?amount=5" %>>$5</a></li>
-                      <li><a href= <%= new_charge_path + "?amount=10" %>>$10</a></li>
-                      <li><a href= <%= new_charge_path + "?amount=15" %>>$15</a></li>
-                      <li><a href= <%= new_charge_path + "?amount=20" %>>$20</a></li>
-                      <li><a href= <%= new_charge_path + "?amount=25" %>>$25</a></li>
-                      <li><a href= <%= new_charge_path + "?amount=50" %>>$50</a></li>
-                      <li><a href= <%= new_charge_path + "?amount=75" %>>$75</a></li>
-                      <li><a href= <%= new_charge_path + "?amount=100" %>>$100</a></li>
-                      <li><a href= <%= new_charge_path + "?amount=150" %>>$150</a></li>
-                      <li><a href= <%= new_charge_path + "?amount=250" %>>$250</a></li>
-                      <li><a href= <%= new_charge_path + "?amount=500" %>>$500</a></li>
-                      <li><a href= <%= new_charge_path + "?amount=1000" %>>$1000</a></li>
-                      
-                      
+        </li> -->
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Add Funds <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href= <%= new_charge_path + "?amount=5" %>>$5</a></li>
+            <li><a href= <%= new_charge_path + "?amount=10" %>>$10</a></li>
+            <li><a href= <%= new_charge_path + "?amount=15" %>>$15</a></li>
+            <li><a href= <%= new_charge_path + "?amount=20" %>>$20</a></li>
+            <li><a href= <%= new_charge_path + "?amount=25" %>>$25</a></li>
+            <li><a href= <%= new_charge_path + "?amount=50" %>>$50</a></li>
+            <li><a href= <%= new_charge_path + "?amount=75" %>>$75</a></li>
+            <li><a href= <%= new_charge_path + "?amount=100" %>>$100</a></li>
+            <li><a href= <%= new_charge_path + "?amount=150" %>>$150</a></li>
+            <li><a href= <%= new_charge_path + "?amount=250" %>>$250</a></li>
+            <li><a href= <%= new_charge_path + "?amount=500" %>>$500</a></li>
+            <li><a href= <%= new_charge_path + "?amount=1000" %>>$1000</a></li>
 
-                    
-                    </ul>
-                  </li>
+
+
+
           </ul>
+        </li>
+      </ul>
 
 
-        </div><!-- /.navbar-collapse -->
-      </div><!-- /.container-fluid -->
-    </nav>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
 
-          <div class="container">
-            <%= yield %>
-          </div>
-
-
-    <% else %>
-    <!--not logged in-->
-    <nav class="navbar navbar-default">
-      <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
+<div class="container">
+  <%= yield %>
+</div>
 
 
-          <%= link_to root_path, class: "navbar-brand" do %>
-          <div class='fantasy_league-font'>Fantasy League</div>
-          <% end %>
-        </div>
-        <%= link_to "Sign Up", new_user_registration_path, class: "navbar-brand" %>
+<% else %>
+<!--not logged in-->
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
 
-        </div><!-- /.navbar-collapse -->
-      </div><!-- /.container-fluid -->
-    </nav>
-    
-    <div class="row">
-      <div class="col-md-1">
-        &nbsp
-      </div> 
-            
-        <div class="col-md-3">
-        <%= image_tag "gold-man-copyright2.gif",  alt: "graphic of one of our customers surrounded by all the gold he has won here" %>
-        <h2><p>Win cash, daily!</p></h2>
-        <h3><p>If you want to win, you no longer have to play the game, just bet on those that do!</p></h3>
-      </div>
-      <div class="col-md-7">
-        <%= yield %>
-      </div>
-      
-      <div class="col-md-1">
-        &nbsp
-      </div> 
-      
+
+      <%= link_to root_path, class: "navbar-brand" do %>
+      <div class='fantasy_league-font'>Fantasy League</div>
+      <% end %>
     </div>
+    <ul class="nav navbar-nav navbar-right">
+      <li><%= link_to "Sign Up", new_user_registration_path, class: "navbar-brand" %></li>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</nav>
 
-  <% end %>
+<div class="row">
+  <div class="col-md-1">
+    &nbsp
+  </div>
+
+  <div class="col-md-3">
+    <%= image_tag "gold-man-copyright2.gif",  alt: "graphic of one of our customers surrounded by all the gold he has won here" %>
+    <h2><p>Win cash, daily!</p></h2>
+    <h3><p>If you want to win, you no longer have to play the game, just bet on those that do!</p></h3>
+  </div>
+  <div class="col-md-7">
+    <%= yield %>
+  </div>
+
+  <div class="col-md-1">
+    &nbsp
+  </div>
+
+</div>
+
+<% end %>
 
 
 
