@@ -50,16 +50,11 @@ body {
 
 .container {
   background: rgba(255,255,255, 0.9);
+  padding-bottom: 20px;
 }
 .login {
   background: rgba(255,255,255, 0.9);
 }
-
-
-// .btn-info{
-//     border-color: $color3 !important;
-//     background-color: $color3 !important;
-// }
 
 .muted {
   color: gray;
@@ -71,9 +66,17 @@ body {
   color: white;
   border-color: #383838;
 }
-
+.navbar-default .navbar-nav > li > a:focus,
 .navbar-default .navbar-nav  > li > a{
   color: white;
+  background-color: inherit;
+}
+
+
+
+.navbar-default .navbar-nav > li > a:hover {
+    background-color: $light-red !important;
+    color:#ffffff;
 }
 
 .navbar-default .navbar-nav .open .dropdown-menu>li>a, .navbar-default .navbar-nav .open .dropdown-menu {
@@ -81,16 +84,12 @@ body {
     color: #ffffff;
   }
 
-.navbar-default .navbar-nav > li > a:hover {
-    background-color: $light-red;
-    color:#ffffff;
-}
 
 .navbar-default .navbar-nav > .active > a,
 .navbar-default .navbar-nav > .active > a:hover,
 .navbar-default .navbar-nav > .active > a:focus {
     background-color: $light-red;
-    color:#ffffff;    // Changes color of main button that is currently active.
+    color: white;    // Changes color of main button that is currently active.
 }
 
 .navbar-default .navbar-nav > .open > a,
@@ -99,6 +98,11 @@ body {
     color: $color-black;
     background-color: $light-gray;  //  Changes color of main menu button once clicked.
 }
+
+.navbar-default .navbar-nav .dropdown-menu>li>a:focus {
+    background-color: $color-black;
+    color: white;    // Changes color of the text when the dropdown-menu is highlighted
+  }
 
 .navbar-default .navbar-nav .open .dropdown-menu>li>a:hover,
 .navbar-default .navbar-nav .open .dropdown-menu>li>a:focus {
@@ -124,4 +128,8 @@ body {
 .well.form-control {
   color: $color-black;
 
+}
+.vert-align {
+  vertical-align: center;
+  height: 100%
 }

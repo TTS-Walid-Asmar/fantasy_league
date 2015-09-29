@@ -96,7 +96,7 @@
               <li><%= link_to "Edit Teams", teams_path %></li>
               <li><%= link_to "Edit Players", players_path %></li>
               <% end %>
-              
+
               <li role="separator" class="divider"></li>
               <li><%= link_to withdraw_path do %>
                 Withdraw <i class="fa fa-money"></i>
@@ -123,7 +123,7 @@
             <li><%= form_tag(new_charge_path, method: "get", class: "well text-center") do %>
             <div class="form-group">
               <%= label_tag("Amount To Add:") %>
-              <%= text_field_tag(:amount, nil, class: "form-control", placeholder: '$') %>
+              <%= number_field_tag(:amount, nil, class: "form-control", placeholder: '$') %>
             </div>
             <%= submit_tag("Add Funds", class: "btn btn-success") %>
             <% end %></li>

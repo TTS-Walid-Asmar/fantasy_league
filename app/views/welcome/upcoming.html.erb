@@ -1,3 +1,4 @@
+<h1>Your Upcoming Leagues:</h1>
 <div class="row">
   <table class="table table-striped">
     <tr>
@@ -29,10 +30,10 @@
         <%= league.users.count %>/<%= league.max_participants %>
       </td>
       <td>
-        <%= number_to_currency league.cost %>
+        <%= number_to_currency(league.cost, precision: 0) %>
       </td>
       <td>
-        <%= league.prizes %>
+        <%= number_to_currency(league.prizes, precision: 0) %>
       </td>
       <td>
         <%= league.start_time.strftime('%a %b %e %I:%M %p %Z') %>

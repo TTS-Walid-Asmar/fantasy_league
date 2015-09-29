@@ -1,4 +1,4 @@
-
+<h1>Join a league!</h1>
 <div class="row">
   <table class="table table-striped">
     <tr>
@@ -30,7 +30,7 @@
         <%= league.users.count %>/<%= league.max_participants %>
       </td>
       <td>
-        <%= number_to_currency league.cost %>
+        <%= number_to_currency(league.cost, precision: 0) %>
       </td>
       <td>
         <%= number_to_currency(league.prizes.round(-2), precision: 0) %>
@@ -40,7 +40,7 @@
       </td>
       <td>
           <% if league.cost > current_user.balance %>
-            <%= link_to "Enter", league, class: "btn btn-primary", style: "border: 1px solid red"%> 
+            <%= link_to "Enter", league, class: "btn btn-primary", style: "border: 1px solid red"%>
           <% else %>
             <%= link_to "Enter", league, class: "btn btn-primary" %>
           <% end %>

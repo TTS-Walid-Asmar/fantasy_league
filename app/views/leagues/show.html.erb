@@ -6,11 +6,10 @@
 <br>
 
 <div class="row">
-  <% if !@league.upcoming? %>
   <div class="col-md-1">
   </div>
 
-  <% end %>
+
   <% @team.player_list.each_index do |index| %>
 
   <div class="col-md-2">
@@ -27,17 +26,23 @@
       </div>
     </div>
     <% end %>
-    <% if @league.upcoming? %>
-    <div class="col-md-2">
-      <%= link_to "Edit", team_path(@team), class: "btn btn-primary" %>
-    </div>
 
-    <% else %>
+
+
     <div class="col-md-1">
     </div>
-    <% end %>
+
 
   </div>
+  <% if @league.upcoming? %>
+  <div class="row">
+    <div class="text-center">
+      <%= link_to "Edit", team_path(@team), class: "btn btn-primary" %>
+    </div>
+  </div>
+  <% end %>
+
+
 <br>
 
 
