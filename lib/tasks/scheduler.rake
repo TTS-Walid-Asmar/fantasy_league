@@ -9,11 +9,16 @@ task :update_league_status => :environment do
         league.save
       end
     else
-      if league.start_time <= Time.now + 7.days
-        league.status = "Past"
-        league.save
+      if league.start_time <= Time.now + 1.days
+        league.process_league
       end
     end
   end
   puts "done."
+end
+
+desc "Pulls data form riot esports api and creates leagues associated with the games in thte data."
+task :load_fantasy_stats => :environment do
+  fant_stat = FantasyStat.new
+  fant_stat.load_fantasy_stats
 end

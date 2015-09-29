@@ -3,9 +3,16 @@
     <h3>Your Team</h3>
   </div>
 </div>
+<br>
 
 <div class="row">
+  <% if !@league.upcoming? %>
+  <div class="col-md-1">
+  </div>
+
+  <% end %>
   <% @team.player_list.each_index do |index| %>
+
   <div class="col-md-2">
     <div class="media">
       <div class="media-body">
@@ -20,21 +27,18 @@
       </div>
     </div>
     <% end %>
+    <% if @league.upcoming? %>
     <div class="col-md-2">
-
-      <% if @league.upcoming? %>
       <%= link_to "Edit", team_path(@team), class: "btn btn-primary" %>
-      <% end %>
     </div>
-  </div>
 
-  <div class="row">
-    <div class="col-md-12">
-
-
-
+    <% else %>
+    <div class="col-md-1">
     </div>
+    <% end %>
+
   </div>
+<br>
 
 
   <div class="row">

@@ -45,7 +45,7 @@ class LeaguesUsersController < ApplicationController
 
     respond_to do |format|
       if @leagues_user.save
-        format.html { redirect_to @leagues_user, notice: 'Leagues user was successfully created.' }
+        format.html { redirect_to @leagues_user}
         format.json { render :show, status: :created, location: @leagues_user }
       else
         format.html { render :new }
@@ -59,7 +59,7 @@ class LeaguesUsersController < ApplicationController
   def update
     respond_to do |format|
       if @leagues_user.update(leagues_user_params)
-        format.html { redirect_to @leagues_user, notice: 'Leagues user was successfully updated.' }
+        format.html { redirect_to @leagues_user}
         format.json { render :show, status: :ok, location: @leagues_user }
       else
         format.html { render :edit }
@@ -73,7 +73,7 @@ class LeaguesUsersController < ApplicationController
   def destroy
     @leagues_user.destroy
     respond_to do |format|
-      format.html { redirect_to leagues_users_url, notice: 'Leagues user was successfully destroyed.' }
+      format.html { redirect_to leagues_users_url}
       format.json { head :no_content }
     end
   end

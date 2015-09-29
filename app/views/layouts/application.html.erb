@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>FantasyLeague</title>
+  <%= favicon_link_tag %>
 
   <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 
@@ -13,7 +14,6 @@
   <!-- Optional theme -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
 
-  <link href="/images/favicon(1).ico" rel="icon" type="image/x-icon" />
 
   <link href='https://fonts.googleapis.com/css?family=Niconne' rel='stylesheet' type='text/css'>
 
@@ -113,31 +113,22 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Add Funds <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href= <%= new_charge_path + "?amount=5" %>>$5</a></li>
-            <li><a href= <%= new_charge_path + "?amount=10" %>>$10</a></li>
-            <li><a href= <%= new_charge_path + "?amount=15" %>>$15</a></li>
-            <li><a href= <%= new_charge_path + "?amount=20" %>>$20</a></li>
-            <li><a href= <%= new_charge_path + "?amount=25" %>>$25</a></li>
-            <li><a href= <%= new_charge_path + "?amount=50" %>>$50</a></li>
-            <li><a href= <%= new_charge_path + "?amount=75" %>>$75</a></li>
-            <li><a href= <%= new_charge_path + "?amount=100" %>>$100</a></li>
-            <li><a href= <%= new_charge_path + "?amount=150" %>>$150</a></li>
-            <li><a href= <%= new_charge_path + "?amount=250" %>>$250</a></li>
-            <li><a href= <%= new_charge_path + "?amount=500" %>>$500</a></li>
-            <li><a href= <%= new_charge_path + "?amount=1000" %>>$1000</a></li>
-
-
-
-
+            <li><%= form_tag(new_charge_path, method: "get", class: "well text-center") do %>
+            <div class="form-group">
+              <%= label_tag("Amount To Add:") %>
+              <%= text_field_tag(:amount, nil, class: "form-control", placeholder: '$') %>
+            </div>
+            <%= submit_tag("Add Funds", class: "btn btn-success") %>
+            <% end %></li>
           </ul>
         </li>
       </ul>
-
-
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
-
+<% if flash[:notice] %>
+<div class="alert alert-warning"><%= flash[:notice] %></div>
+<% end %>
 <div class="container">
   <%= yield %>
 </div>
@@ -168,23 +159,16 @@
 </div><!-- /.container-fluid -->
 </nav>
 
+
+<% if flash[:notice] %>
+<div class="alert alert-warning"><%= flash[:notice] %></div>
+<% end %>
 <div class="row">
-  <div class="col-md-1">
-    &nbsp
+  <div class="col-md-3 col-md-offset-1 login">
+      <%= yield %>
   </div>
+</div>
 
-  <div class="col-md-3">
-    <%= image_tag "gold-man-copyright2.gif",  alt: "graphic of one of our customers surrounded by all the gold he has won here" %>
-    <h2><p>Win cash, daily!</p></h2>
-    <h3><p>If you want to win, you no longer have to play the game, just bet on those that do!</p></h3>
-  </div>
-  <div class="col-md-7">
-    <%= yield %>
-  </div>
-
-  <div class="col-md-1">
-    &nbsp
-  </div>
 
 </div>
 

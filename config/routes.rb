@@ -2,44 +2,37 @@ Rails.application.routes.draw do
 
 
 
-  post 'add_funds' => 'welcome#add_to_funds'
-  
+
   resources :leagues_users
-  resources :teams_players
+  resources :teams_players, only: :new
   get 'team/submit_team' => 'teams#submit_team'
 
-  get 'welcome/add_funds'
+  get 'leagues/process' => 'leagues#process_league'
 
   resources :leagues
   resources :players
   resources :teams
-  get 'welcome/home' => 'welcome#home'
 
   get 'home' => 'welcome#home'
-  
-  get 'index' => 'welcome#home'
 
   root 'welcome#home'
-  
+
   get 'how' => 'welcome#how'
-  
-  get "terms" => "welcome#terms"
-  
-  get 'welcome/upcoming' => 'welcome#upcoming'
+
+
+
 
   get 'upcoming' => 'welcome#upcoming'
 
-  get 'welcome/live' => 'welcome#live'
-  
+
   get 'live' => 'welcome#live'
 
-  get 'welcome/history' => 'welcome#history'
-  
+
   get 'history' => 'welcome#history'
-  
-  get 'welcome/add_funds' => 'welcome#add_funds'
-  
-  get 'add_funds' => 'welcome#add_funds'
+
+
+
+
 
   get 'welcome/contact'
 
@@ -50,10 +43,10 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :charges
-  
-  
-  
-  
+
+
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

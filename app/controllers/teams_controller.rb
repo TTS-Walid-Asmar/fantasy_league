@@ -12,11 +12,16 @@ class TeamsController < ApplicationController
   def show
     @my_players = @team.player_list
     @players = @team.league.player_list.reject {|player_id| @my_players.include?(player_id)}
-
+    @playerlist_ppg = FantasyStat.last.find_player_ppgs(@team.league.player_list)
     @playernames = FantasyStat.last.find_player_names(@players)
     @player_roles = FantasyStat.last.find_player_roles(@players)
     @player_ppg = FantasyStat.last.find_player_ppgs(@players)
-    @player_costs = FantasyStat.last.find_player_costs(@player_ppg)
+
+
+    @player_avg = FantasyStat.last.player_ppg_average(@playerlist_ppg)
+    @player_costs = FantasyStat.last.find_player_costs(@player_avg, @player_ppg)
+
+
     # @filter_term = params[:position]
     # @filter_term ||= "all"
     # @players = Player.where.not(id: @team.player_ids)
@@ -27,7 +32,9 @@ class TeamsController < ApplicationController
     @my_playernames = FantasyStat.last.find_my_player_names(@my_players)
     @my_player_roles = FantasyStat.last.find_player_roles(@my_players)
     @my_player_ppg = FantasyStat.last.find_player_ppgs(@my_players)
-    @my_player_costs = FantasyStat.last.find_player_costs(@my_player_ppg)
+    @my_player_costs = FantasyStat.last.find_player_costs(@player_avg, @my_player_ppg)
+
+
   end
 
   # GET /teams/new
@@ -87,11 +94,15 @@ class TeamsController < ApplicationController
     end
   end
   def submit_team
-    @team.user = current_user
-    @team.save
-    current_user.balance -= @team.league.cost
-    current_user.save
-    redirect_to new_leagues_user_path(league_id: @team.league.id)
+    if @team.league.is_full?
+      redirect_to @team, notice: "Sorry, this league is full."
+    else
+      @team.user = current_user
+      @team.save
+      current_user.balance -= @team.league.cost
+      current_user.save
+      redirect_to new_leagues_user_path(league_id: @team.league.id)
+    end
 
   end
 
