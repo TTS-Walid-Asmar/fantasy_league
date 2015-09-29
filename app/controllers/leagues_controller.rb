@@ -78,6 +78,11 @@ class LeaguesController < ApplicationController
       format.json { head :no_content }
     end
   end
+  def process_league
+    @league = League.find(params[:id])
+    @league.process_league
+    redirect_to leagues_path
+  end
 
   private
 

@@ -23,13 +23,15 @@
 .cant-see-me{
     display: none;
 }
-
-.container {
-  background: rgba(255,255,255,0.8);
+body {
+  background: image-url("mord-bg.jpg") no-repeat;
+  background-size: cover;
 }
 
+
+
  $color-black: #170d19; //rgba(23, 13, 25, 100)
- $light-red: #ed6568; //rgba(237, 101, 104, 100)
+ $light-red: #D02B2F; //rgba(237, 101, 104, 100)
  $light-green: #64ee5c; //rgba(100, 238, 92, 100)
  $light-gray: #edf3f2; //rgba(237, 243, 242, 100)
  $color5: #edf398; //rgba(237, 243, 152, 100)
@@ -39,6 +41,18 @@
     font-family: 'Niconne', cursive;
     font-size: 150%;
     color: white;
+}
+.login .fantasy_league-font{
+    font-family: 'Niconne', cursive;
+    font-size: 150%;
+    color: $light-red;
+}
+
+.container {
+  background: rgba(255,255,255, 0.9);
+}
+.login {
+  background: rgba(255,255,255, 0.9);
 }
 
 
@@ -55,6 +69,7 @@
 .navbar{
   background: $color-black;
   color: white;
+  border-color: #383838;
 }
 
 .navbar-default .navbar-nav  > li > a{
@@ -65,38 +80,48 @@
     background-color: $light-red;
     color: #ffffff;
   }
-  
+
 .navbar-default .navbar-nav > li > a:hover {
     background-color: $light-red;
     color:#ffffff;
-}  
+}
 
-.navbar-default .navbar-nav > .active > a, 
-.navbar-default .navbar-nav > .active > a:hover, 
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
 .navbar-default .navbar-nav > .active > a:focus {
     background-color: $light-red;
     color:#ffffff;    // Changes color of main button that is currently active.
 }
 
-.navbar-default .navbar-nav > .open > a, 
-.navbar-default .navbar-nav > .open > a:hover, 
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
 .navbar-default .navbar-nav > .open > a:focus {
     color: $color-black;
     background-color: $light-gray;  //  Changes color of main menu button once clicked.
 }
 
-.navbar-default .navbar-nav .open .dropdown-menu>li>a:hover, 
+.navbar-default .navbar-nav .open .dropdown-menu>li>a:hover,
 .navbar-default .navbar-nav .open .dropdown-menu>li>a:focus {
     background-color: $light-red;
     color: $color-black;    // Changes color of the text when the dropdown-menu is highlighted
   }
-  
+
 .navbar-default .nav .dropdown .dropdown-menu {
     -webkit-border-radius: 5px 5px 5px 5px ;
     -moz-border-radius: 5px 5px 5px 5px ;
-    border-radius: 5px 5px 5px 5px ;    
+    border-radius: 5px 5px 5px 5px ;
     margin-top: -3px;
     margin-left: 0px;
     border: none;
 
-}  
+}
+.well {
+  background: inherit;
+  border: none;
+  box-shadow: none;
+  margin: 0;
+}
+.well.form-control {
+  color: $color-black;
+
+}

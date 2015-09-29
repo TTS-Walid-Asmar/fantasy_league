@@ -10,6 +10,7 @@ class TeamsController < ApplicationController
   # GET /teams/1
   # GET /teams/1.json
   def show
+
    @my_players = @team.player_list
    @players = @team.league.player_list.reject {|player_id| @my_players.include?(player_id)}
    @playerlist_ppg = FantasyStat.last.find_player_ppgs(@team.league.player_list)
@@ -54,6 +55,7 @@ class TeamsController < ApplicationController
       @average_cost_per_player = 0
     end
     
+
   end
 
   # GET /teams/new
@@ -113,11 +115,15 @@ class TeamsController < ApplicationController
     end
   end
   def submit_team
-    @team.user = current_user
-    @team.save
-    current_user.balance -= @team.league.cost
-    current_user.save
-    redirect_to new_leagues_user_path(league_id: @team.league.id)
+    if @team.league.is_full?
+      redirect_to @team, notice: "Sorry, this league is full."
+    else
+      @team.user = current_user
+      @team.save
+      current_user.balance -= @team.league.cost
+      current_user.save
+      redirect_to new_leagues_user_path(league_id: @team.league.id)
+    end
 
   end
 

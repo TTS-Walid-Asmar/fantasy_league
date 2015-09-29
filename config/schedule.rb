@@ -24,3 +24,7 @@ set :output, 'log/scheduler.log'
 every 1.minutes do
   rake "update_league_status"
 end
+
+every 1.day do
+  rake 'load_fantasy_stats'
+end
