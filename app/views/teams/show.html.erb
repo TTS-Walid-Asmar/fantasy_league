@@ -1,3 +1,5 @@
+
+
 <% if flash[:notice] %>
 <div class="alert alert-warning"><%= flash[:notice] %></div>
 <% end %>
@@ -50,7 +52,13 @@
               <%= number_to_currency(@player_costs[index], precision: 0) %>
             </td>
             <td>
-              <%= link_to "Add", new_teams_player_path(player_id: @players[index], team_id: @team.id) %>
+              <% if @player_costs[index] > @salary_remaining %>
+                 <%= link_to 'Add', new_teams_player_path(player_id: @players[index], team_id: @team.id, player_cost: @player_costs[index]), class: "btn btn-default disabled"%>
+              <% else %>
+                <%= link_to 'Add', new_teams_player_path(player_id: @players[index], team_id: @team.id, player_cost: @player_costs[index]), class: "btn btn-success"%>
+              <% end %> 
+              
+            
             </td>
           </tr>
           <% end %>
@@ -68,10 +76,10 @@
       <div class="col-md-6">
         <div class="row skinny-col">
           <div class="col-md-6 ">
-            <h4>$50000</h4>
+            <h4><%= number_to_currency @salary_remaining %></h4>
           </div>
           <div class="col-md-6">
-            <h4>$10000</h4>
+            <h4><%= number_to_currency @average_cost_per_player %></h4>
           </div>
         </div>
         <div class="row skinny-col">
@@ -98,6 +106,11 @@
               </caption>
             </tr>
           </thead>
+          <% if @team.league.cost > current_user.balance %>
+            <div style="color: red">Cost: <%=number_to_currency @team.league.cost %></div>
+          <% else %> 
+            Cost: <%=number_to_currency @team.league.cost %>
+          <% end %>
           <tbody>
             <% @my_players.each_index do |index|%>
             <tr>
@@ -121,6 +134,7 @@
 
         </table>
       </div>
+      
       <% if @my_players.size == 5 %>
       <% if @team.league.cost > current_user.balance %>
       <!-- Button trigger modal -->
@@ -162,3 +176,5 @@ $(document).ready(function () {
 });
 
 </script>
+
+

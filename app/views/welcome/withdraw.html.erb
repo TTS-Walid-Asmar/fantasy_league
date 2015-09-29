@@ -1,0 +1,64 @@
+<h1>Request Withdrawal of Money via Check</h1>
+<%= form_tag(withdrawn_path, class: "form-horizontal") do %>
+
+<div class="col-md-6">
+  <div class="field">
+    <%= label_tag :username %><br />
+    <%= text_field_tag :username%>
+  </div>
+  
+  <div class="field">
+    <%= label_tag  "Full Name" %><br />
+    <%= text_field_tag  :name%>
+  </div>
+
+  <div class="field">
+    <%= label_tag  "Email Address" %><br />
+    <%= text_field_tag  :email %>
+  </div>
+
+  <div class="field">
+    <%= label_tag  "Amount $" %><br />
+    <%= text_field_tag  :amount%>
+  </div>
+ </div>
+ 
+ <div class="col-md-6">
+  <div class="field">
+    <%= label_tag  "Street Address" %><br />
+    <%= text_field_tag  :address%>
+  </div>
+
+  <div class="field">
+    <%= label_tag  "State" %><br />
+    <%= text_field_tag  :state%>
+  </div>
+  
+  <div class="field">
+    <%= label_tag  "Zip Code" %><br />
+    <%= text_field_tag  :zipcode%>
+  </div>
+ </div>
+<div class="col-md-12">
+
+
+    <p>
+      Check withdrawal requests will take approximately 7-10 business days.  
+    </p>
+    
+      <div class="actions">
+         <%= link_to root_path, class: "btn btn-danger" do %>
+            Cancel
+         <% end %>
+         <button type="submit" class="btn btn-info">Submit</button> 
+      </div>
+<% end %>
+
+
+<p>
+Anti-fraud checks are conducted on playing patterns and deposits prior to processing all withdrawals. We may request additional information before your withdrawal is approved. We also reserve the right to refuse any withdrawal request that doesn't meet the guidelines of our Terms of Use.
+<p>
+In cases where a site user has received a bonus or other benefits as a result of their deposit and has not yet played through the deposit (entering contests whose total entry fees equal the value of the deposit), FanDuel reserves the right to refuse the withdrawal, refund the deposit, and/or close the user account.
+<p>
+You may be requested to provide your mailing address and SSN before the withdrawal is processed - this helps in the event that your annual net winnings may exceed $600 and we are required to file a 1099-MISC tax form.
+</div>

@@ -10,6 +10,8 @@ class TeamsPlayersController < ApplicationController
   # GET /teams_players/1
   # GET /teams_players/1.json
   def show
+    
+
   end
 
   # GET /teams_players/new
@@ -17,7 +19,7 @@ class TeamsPlayersController < ApplicationController
 
     @team = Team.find(params[:team_id])
     @player_id = params[:player_id].to_i
-
+    @player_cost = params[:player_cost].to_i
 
 
     if @team.can_add?(@player_id)

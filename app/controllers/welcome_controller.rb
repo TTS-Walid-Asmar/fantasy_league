@@ -28,6 +28,25 @@ class WelcomeController < ApplicationController
 
   end
 
+  def withdraw
+  
+  end
+  
+  def withdrawn
+  
+    @amount = (params[:amount].to_f)
+    if current_user.balance >= @amount
+      current_user.balance -= @amount
+      current_user.save
+      redirect_to root_path
+    else
+      flash[:notice] = "Insufficient Funds! "
+    end 
+    
+    
+  end 
+  
+  
   def add_to_funds
 
     # current_user.balance += params[:quantity].to_f

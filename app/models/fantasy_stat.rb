@@ -164,22 +164,24 @@ class FantasyStat < ActiveRecord::Base
     return player_ppgs
   end
 
-  def find_player_costs(player_ppgs)
-    total_player_ppgs = 0
-    player_ppgs.each do |ppg|
-      total_player_ppgs += ppg
-    end
-    if player_ppgs.size >0
-      avg = total_player_ppgs/player_ppgs.size
-    end
-
-    costs = []
-    player_ppgs.each do |ppg|
-      est_cost = (35000/5*ppg/(1.25*(avg + 1))).round(-2)
-      costs.push(est_cost)
-    end
-    return costs
+  def find_player_costs(avg, my_player_ppg)
+   costs = []
+   my_player_ppg.each do |ppg|
+     est_cost = (50000/5*ppg/(0.75*(avg + 1))).round(-2)
+     costs.push(est_cost)
+   end
+   return costs
   end
+ def player_ppg_average(player_ppgs)
+   total_player_ppgs = 0
+   player_ppgs.each do |ppg|
+     total_player_ppgs += ppg
+   end
+   if player_ppgs.size >0
+     avg = total_player_ppgs/player_ppgs.size
+   end
+   return avg
+ end
   def find_player_urls(player_ids)
     player_urls = []
     player_ids.each do |player_id|

@@ -10,24 +10,50 @@ class TeamsController < ApplicationController
   # GET /teams/1
   # GET /teams/1.json
   def show
-    @my_players = @team.player_list
-    @players = @team.league.player_list.reject {|player_id| @my_players.include?(player_id)}
+   @my_players = @team.player_list
+   @players = @team.league.player_list.reject {|player_id| @my_players.include?(player_id)}
+   @playerlist_ppg = FantasyStat.last.find_player_ppgs(@team.league.player_list)
+   @playernames = FantasyStat.last.find_player_names(@players)
+   @player_roles = FantasyStat.last.find_player_roles(@players)
+   @player_ppg = FantasyStat.last.find_player_ppgs(@players)
 
-    @playernames = FantasyStat.last.find_player_names(@players)
-    @player_roles = FantasyStat.last.find_player_roles(@players)
-    @player_ppg = FantasyStat.last.find_player_ppgs(@players)
-    @player_costs = FantasyStat.last.find_player_costs(@player_ppg)
-    # @filter_term = params[:position]
-    # @filter_term ||= "all"
-    # @players = Player.where.not(id: @team.player_ids)
-    # if @filter_term != 'all'
-    #   @players = @players.where(position: @filter_term.downcase)
-    # end
 
-    @my_playernames = FantasyStat.last.find_my_player_names(@my_players)
-    @my_player_roles = FantasyStat.last.find_player_roles(@my_players)
-    @my_player_ppg = FantasyStat.last.find_player_ppgs(@my_players)
-    @my_player_costs = FantasyStat.last.find_player_costs(@my_player_ppg)
+   @player_avg = FantasyStat.last.player_ppg_average(@playerlist_ppg)
+   @player_costs = FantasyStat.last.find_player_costs(@player_avg, @player_ppg)
+
+
+   # @filter_term = params[:position]
+   # @filter_term ||= "all"
+   # @players = Player.where.not(id: @team.player_ids)
+   # if @filter_term != 'all'
+   #   @players = @players.where(position: @filter_term.downcase)
+   # end
+
+   @my_playernames = FantasyStat.last.find_my_player_names(@my_players)
+   @my_player_roles = FantasyStat.last.find_player_roles(@my_players)
+   @my_player_ppg = FantasyStat.last.find_player_ppgs(@my_players)
+   @my_player_costs = FantasyStat.last.find_player_costs(@player_avg, @my_player_ppg)
+    
+    
+   
+
+    sum = 0
+    
+    @my_player_costs.each do |cost|
+        sum += cost
+    end
+      
+    @salary_remaining = 50000 - sum
+      
+    
+ 
+    
+    if @my_players.size !=5
+      @average_cost_per_player = (@salary_remaining/(5-@my_players.size)) 
+    else
+      @average_cost_per_player = 0
+    end
+    
   end
 
   # GET /teams/new
@@ -94,6 +120,7 @@ class TeamsController < ApplicationController
     redirect_to new_leagues_user_path(league_id: @team.league.id)
 
   end
+
 
 
   private

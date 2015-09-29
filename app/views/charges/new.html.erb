@@ -2,11 +2,13 @@
 <p>
     Current Balance: <strong><%= number_to_currency current_user.balance %></strong>
 </p>
-<p>To play Fantasy League you need to add funds to your account. Don't worry, you can withdraw your money at any time for free.  How much would you like to add? </p>
+<p>To play Fantasy League you need to add funds to your account. </p>
+<p>Don't worry, you can withdraw your money at any time for free.  </p>
+<p>How much would you like to add? </p>
 <p>    
 
 <%= form_tag charges_path do %>
-  <strong>$<%= @amount %></strong>
+  <strong><%= number_to_currency @amount %></strong>
   <br>
   <div class="cant-see-me">
     <%= number_field_tag :amount, @amount %>

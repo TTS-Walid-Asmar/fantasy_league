@@ -46,12 +46,14 @@ Rails.application.routes.draw do
   get 'welcome/us'
 
   get 'welcome/help'
+  
+  get 'withdraw' => 'welcome#withdraw'
 
   devise_for :users
 
   resources :charges
   
-  
+  post 'withdrawn' => 'welcome#withdrawn'
   
   
   # The priority is based upon order of creation: first created -> highest priority.

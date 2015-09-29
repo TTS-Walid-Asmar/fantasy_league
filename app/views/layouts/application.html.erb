@@ -13,10 +13,11 @@
   <!-- Optional theme -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
 
-  <link href="/images/favicon(1).ico" rel="icon" type="image/x-icon" />
+  <%= favicon_link_tag %>
 
   <link href='https://fonts.googleapis.com/css?family=Niconne' rel='stylesheet' type='text/css'>
 
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
   <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['my_google_api_key'] %>"></script>
 
@@ -94,7 +95,12 @@
               <li><%= link_to "Edit Teams", teams_path %></li>
               <li><%= link_to "Edit Players", players_path %></li>
               <% end %>
-
+              
+              <li role="separator" class="divider"></li>
+              <li><%= link_to withdraw_path do %>
+                Withdraw <i class="fa fa-money"></i>
+                <% end %>
+              </li>
 
               <li role="separator" class="divider"></li>
               <li><%= link_to destroy_user_session_path, method: :delete do %>
