@@ -3,10 +3,15 @@ class ChargesController < ApplicationController
   layout "application"
   # similar to the case in application controller, you could assign a method instead
 
-  
+
   def new
-     @amount = params[:amount]
-     @path = params[:path]
+    @amount = params[:amount].to_f.round(2)
+    @path = params[:path]
+    if @amount < 10
+      flash[:notice] = "You must add a minimum of $10."
+      redirect_to @path
+    end
+
   end
 
   def create
@@ -25,22 +30,22 @@ class ChargesController < ApplicationController
     :description => 'Rails Stripe customer',
     :currency    => 'usd'
     )
-    
+
     if charge.status == "succeeded"
       current_user.balance += params[:amount].to_f
-      current_user.save 
-    end 
-    
+      current_user.save
+    end
+
   rescue Stripe::CardError => e
     flash[:error] = e.message
-    
- 
-    redirect_to charges_path
-    
 
-    
+
+    redirect_to charges_path
+
+
+
   end
 
-    
-  
+
+
 end

@@ -123,7 +123,7 @@
             <li><%= form_tag(new_charge_path, method: "get", class: "well text-center") do %>
             <div class="form-group">
               <%= label_tag("Amount To Add:") %>
-              <%= number_field_tag(:amount, nil, class: "form-control", placeholder: '$') %>
+              <%= number_field_tag(:amount, nil, class: "form-control", placeholder: '$10 Minim.', step: 'any') %>
             </div>
             <div class="hidden">
               <%= text_field_tag :path, request.original_url %>
