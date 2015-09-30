@@ -125,6 +125,9 @@
               <%= label_tag("Amount To Add:") %>
               <%= text_field_tag(:amount, nil, class: "form-control", placeholder: '$') %>
             </div>
+            <div class="hidden">
+              <%= text_field_tag :path, request.original_url %>
+            </div>
             <%= submit_tag("Add Funds", class: "btn btn-success") %>
             <% end %></li>
           </ul>

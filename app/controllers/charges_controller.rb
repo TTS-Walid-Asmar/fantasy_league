@@ -6,10 +6,12 @@ class ChargesController < ApplicationController
   
   def new
      @amount = params[:amount]
+     @path = params[:path]
   end
 
   def create
     # Amount in cents
+    @path = params[:path]
     @amount = (params[:amount].to_f.round(2) * 100).to_i
 
     customer = Stripe::Customer.create(

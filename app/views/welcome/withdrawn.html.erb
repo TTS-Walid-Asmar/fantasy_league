@@ -1,1 +1,11 @@
-<h1>No one should see this.  If you do, please let me know</h1>
+<h1>Opps!</h1>
+<p>
+  <h2>We are so sorry, but there are insufficient funds to make that withdrawl :( </h2>
+</p>
+<p>At this time it is not possible to withdraw more than the amount in your balance. </p>
+<p><h2>Currently you can withdraw up to <%=number_to_currency current_user.balance %></p></h2>
+<p>Would you like to withdraw <strong><%=number_to_currency current_user.balance %></strong>?</p>
+<% withdrawtext = ("Withdraw $" + current_user.balance.to_s) %> 
+<% withdrawpath = (withdraw_path(amount: current_user.balance.to_s)) %>
+<center><%= link_to 'Cancel', root_path, class:"btn btn-danger"%> <%= link_to withdrawtext, withdrawpath, class:"btn btn-success"%></center>
+<p>&nbsp</p>

@@ -19,14 +19,22 @@
 
   <div class="field">
     <%= label_tag  "Amount $" %><br />
-    <%= text_field_tag  :amount%>
+    <% if @amount.nil? %>
+        <% @amount = 0 %>
+    <% end %> 
+    <%= text_field_tag  :amount,  placeholder = @amount%>
   </div>
  </div>
  
  <div class="col-md-6">
   <div class="field">
-    <%= label_tag  "Street Address" %><br />
-    <%= text_field_tag  :address%>
+    <%= label_tag  "Street Address 1" %><br />
+    <%= text_field_tag  :address1%>
+  </div>
+
+  <div class="field">
+    <%= label_tag  "Street Address 2" %><br />
+    <%= text_field_tag  :address2%>
   </div>
 
   <div class="field">

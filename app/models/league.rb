@@ -42,7 +42,7 @@ class League < ActiveRecord::Base
       self.save
     end
     def is_full?
-      league.users.size >= league.max_participants
+      self.users.size >= self.max_participants
     end
 
 

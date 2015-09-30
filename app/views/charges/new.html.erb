@@ -1,28 +1,41 @@
-<h1>Add additional funds to your account</h1>
-<p>
-    Current Balance: <strong><%= number_to_currency current_user.balance %></strong>
-</p>
-<p>To play Fantasy League you need to add funds to your account. </p>
-<p>Don't worry, you can withdraw your money at any time for free.  </p>
-<p>How much would you like to add? </p>
-<p>    
 
-<%= form_tag charges_path do %>
-  <strong><%= number_to_currency @amount %></strong>
-  <br>
-  <div class="cant-see-me">
-    <%= number_field_tag :amount, @amount %>
+  <div class="col-md-2">
+    &nbsp
   </div>
-  <script 
-          src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-          data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-          data-description=  "Adding Funds!"
-          
-          data-amount= <%= (@amount.to_f.round(2) * 100).to_i %>
-          data-locale="auto">
-    
-  </script>
-<% end %>
-<br>
-<p>If this is not correct, please click on cancel:</p>
-<%= link_to 'Cancel', root_path, class:"btn btn-danger"%> 
+  <div class="col-md-8">
+    <h1>Add additional funds to your account</h1>
+    <p>
+        Current Balance: <strong><%= number_to_currency current_user.balance %></strong>
+    </p>
+    <p>To play Fantasy League you need to have funds in your account. </p>
+    <p>Don't worry, you can <%= link_to "withdraw", withdraw_path %> your money at any time for free.  </p>
+    <p>How much would you like to add? </p>
+    <p>    
+      <div class="col-md-6">
+        <%= form_tag charges_path do %>
+          <strong><%= number_to_currency @amount %></strong>
+          <br>
+          <div class="cant-see-me">
+            <%= number_field_tag :amount, @amount %>
+            <%= text_field_tag :path, @path %>
+          </div>
+          <script 
+                  src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                  data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+                  data-description=  "Adding Funds!"
+                  
+                  data-amount= <%= (@amount.to_f.round(2) * 100).to_i %>
+                  data-locale="auto">
+            
+          </script>
+        <% end %>
+        </div>
+        <div class="col-md-6">
+        If this is not correct, please click on cancel:
+        <br>
+        <%= link_to 'Cancel', root_path, class:"btn btn-danger"%> 
+        </div>
+  </div>
+  <div class="col-md-2">
+    &nbsp
+  </div>

@@ -53,9 +53,14 @@
             </td>
             <td>
               <% if @player_costs[index] > @salary_remaining %>
-                 <%= link_to 'Add', new_teams_player_path(player_id: @players[index], team_id: @team.id, player_cost: @player_costs[index]), class: "btn btn-default disabled"%>
+                 <%= link_to  new_teams_player_path(player_id: @players[index], team_id: @team.id, player_cost: @player_costs[index]), class: "btn btn-default disabled" do %>
+                  Add <i class="glyphicon glyphicon-plus-sign"> </i>
+                  <% end %>
               <% else %>
-                <%= link_to 'Add', new_teams_player_path(player_id: @players[index], team_id: @team.id, player_cost: @player_costs[index]), class: "btn btn-success"%>
+                  <%= link_to  new_teams_player_path(player_id: @players[index], team_id: @team.id, player_cost: @player_costs[index]), class: "btn btn-success" do %>
+                  Add <i class="glyphicon glyphicon-plus-sign"> </i>
+                  <% end %>
+              
               <% end %> 
               
             
@@ -126,8 +131,11 @@
               <td>
                 <%= number_to_currency(@my_player_costs[index], precision: 0) %>
               </td>
-              <td><%= link_to 'Remove', edit_team_path(id: @team.id, player_id: @my_players[index]) %></td>
-
+              <td>
+                  <%= link_to  edit_team_path(id: @team.id, player_id: @my_players[index]), class: "btn btn-danger" do %>
+                  Remove <i class="glyphicon glyphicon-minus-sign"> </i>
+                  <% end %>
+              </td>
             </tr>
             <% end %>
           </tbody>
@@ -156,7 +164,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <%= link_to "Add Funds", new_charge_path(amount: (@team.league.cost - current_user.balance)), class: "btn btn-success" %>
+              <%= link_to "Add Funds", new_charge_path(amount: (@team.league.cost - current_user.balance), path: request.original_url), class: "btn btn-success" %>
             </div>
           </div>
         </div>

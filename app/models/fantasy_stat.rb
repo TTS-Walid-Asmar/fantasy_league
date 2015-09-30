@@ -169,7 +169,7 @@ class FantasyStat < ActiveRecord::Base
 
     costs = []
     my_player_ppg.each do |ppg|
-      est_cost = (50000/5*ppg/(0.75*(avg + 1))).round(-2)
+      est_cost = (50000/5*ppg/(1.0*(avg + 1))).round(-2)
       costs.push(est_cost)
     end
     return costs
