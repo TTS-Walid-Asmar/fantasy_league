@@ -16,7 +16,7 @@ class Team < ActiveRecord::Base
     ]
   end
   def total_score
-    player_scores = FantasyStat.last.find_player_scores(self.league.games, self.player_list, self.league.tournament_id)
+    player_scores = self.league.fantasy_stat.find_player_scores(self.league.games, self.player_list, self.league.tournament_id)
     sum = 0
     player_scores.each do |key, value|
       sum += value['score']
@@ -24,11 +24,12 @@ class Team < ActiveRecord::Base
     return sum.round(1)
   end
   def can_add?(player_id)
-    roles = FantasyStat.last.find_player_roles(self.player_list)
-    player_role = FantasyStat.last.find_single_role(player_id)
+    roles = self.league.fantasy_stat.find_player_roles(self.player_list)
+    player_role = self.league.fantasy_stat.find_single_role(player_id)
     if roles.include?(player_role)
       return false
+    else
+      return  true
     end
-    return  true
   end
 end

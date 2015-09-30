@@ -1,5 +1,6 @@
 class League < ActiveRecord::Base
 
+    belongs_to :fantasy_stat
     has_many :teams
     has_many :leagues_users
     has_many :users, through: :leagues_users

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150928160843) do
+ActiveRecord::Schema.define(version: 20150930140511) do
 
   create_table "fantasy_stats", force: :cascade do |t|
     t.text "fant_stats"
@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 20150928160843) do
     t.text     "player_list"
     t.integer  "tournament_id"
     t.string   "slug"
+    t.integer  "fantasy_stat_id"
   end
 
   add_index "leagues", ["slug"], name: "index_leagues_on_slug", unique: true

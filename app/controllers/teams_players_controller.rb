@@ -10,7 +10,7 @@ class TeamsPlayersController < ApplicationController
   # GET /teams_players/1
   # GET /teams_players/1.json
   def show
-    
+
 
   end
 
@@ -19,24 +19,19 @@ class TeamsPlayersController < ApplicationController
 
     @team = Team.find(params[:team_id])
     @player_id = params[:player_id].to_i
+
     @player_cost = params[:player_cost].to_i
 
 
     if @team.can_add?(@player_id)
-      @team.player_list.push(@player_id)
 
-      respond_to do |format|
-        if @team.save
-          format.html { redirect_to @team }
-          format.json { render :show, status: :created, location: @teams_player }
-        else
-          format.html { render :new }
-          format.json { render json: @teams_player.errors, status: :unprocessable_entity }
-        end
-      end
+      @team.player_list.push(@player_id)
+      @team.save
+      redirect_to team_path(id: @team.id, position: params[:position])
     else
       flash[:notice] = "Sorry this player could not be added."
-      redirect_to @team
+
+      redirect_to team_path(@team, position: params[:position])
     end
 
   end

@@ -20,10 +20,10 @@ class LeaguesController < ApplicationController
       redirect_to @team
     else
       @team = Team.find_by(user_id: current_user.id, league_id: @league.id)
-      @team_names = FantasyStat.last.find_player_names(@team.player_list)
-      @team_roles = FantasyStat.last.find_player_roles(@team.player_list)
-      @team_pics =  FantasyStat.last.find_player_urls(@team.player_list)
-      @team_player_scores = FantasyStat.last.find_player_scores(@league.games, @team.player_list, @league.tournament_id)
+      @team_names = @league.fantasy_stat.find_player_names(@team.player_list)
+      @team_roles = @league.fantasy_stat.find_player_roles(@team.player_list)
+      @team_pics =  @league.fantasy_stat.find_player_urls(@team.player_list)
+      @team_player_scores = @league.fantasy_stat.find_player_scores(@league.games, @team.player_list, @league.tournament_id)
       @rankings = @league.rank_users_by_score
     end
 

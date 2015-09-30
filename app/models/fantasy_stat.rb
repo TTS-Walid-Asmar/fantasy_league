@@ -1,5 +1,6 @@
 class FantasyStat < ActiveRecord::Base
   include HTTParty
+  has_many :leagues
   serialize :fant_stats, Hash
   serialize :player_data, Hash
   serialize :tournaments, Hash
@@ -65,6 +66,7 @@ class FantasyStat < ActiveRecord::Base
         league.status = "Upcoming"
         league.max_participants = rand(1000)
         league.cost = rand(0..100)
+        league.fantasy_stat_id = self.id
         league.player_list = create_player_list_and_ppg(tourney, league.games)
         league.name = "Test"
         league.save
@@ -169,7 +171,10 @@ class FantasyStat < ActiveRecord::Base
 
     costs = []
     my_player_ppg.each do |ppg|
-      est_cost = (50000/5*ppg/(0.75*(avg + 1))).round(-2)
+      average_cost_per_player = 50000/5
+
+
+      est_cost = ((ppg-avg)*200+average_cost_per_player).round(-2)
       costs.push(est_cost)
     end
     return costs

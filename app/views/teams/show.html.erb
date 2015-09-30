@@ -1,19 +1,15 @@
-
-
-<% if flash[:notice] %>
-<div class="alert alert-warning"><%= flash[:notice] %></div>
-<% end %>
 <div class="row">
   <div class="col-md-6">
     <ul class="nav nav-tabs">
-      <li role="presentation" class="all"><%= link_to "All", team_path(id: @team, position: "all")%></li>
-      <li role="presentation" class="top"><%= link_to "Top", team_path(id: @team, position: "top")%></li>
-      <li role="presentation" class="jungler"><%= link_to "Jungler", team_path(id: @team, position: "jungler")%></li>
-      <li role="presentation" class="mid"><%= link_to "Mid", team_path(id: @team, position: "mid")%></li>
-      <li role="presentation" class="adc"><%= link_to "ADC", team_path(id: @team, position: "adc")%></li>
-      <li role="presentation" class="support"><%= link_to "Support", team_path(id: @team, position: "support")%></li>
+      <li role="presentation" class="all"><%= link_to "All", team_path(id: @team, position: "All")%></li>
+      <li role="presentation" class="top"><%= link_to "Top", team_path(id: @team, position: "Top Lane")%></li>
+      <li role="presentation" class="jungler"><%= link_to "Jungler", team_path(id: @team, position: "Jungler")%></li>
+      <li role="presentation" class="mid"><%= link_to "Mid", team_path(id: @team, position:"Mid Lane")%></li>
+      <li role="presentation" class="adc"><%= link_to "ADC", team_path(id: @team, position: "AD Carry")%></li>
+      <li role="presentation" class="support"><%= link_to "Support", team_path(id: @team, position: "Support")%></li>
 
     </ul>
+
     <div class="table-responsive">
       <table class="table table-striped">
         <thead>
@@ -38,6 +34,7 @@
 
         <tbody>
           <% @players.each_index do |index| %>
+          <% if @filter_array.include?(@player_roles[index]) %>
           <tr>
             <td>
               <%= @playernames[index] %>
@@ -55,12 +52,13 @@
               <% if @player_costs[index] > @salary_remaining %>
                  <%= link_to 'Add', new_teams_player_path(player_id: @players[index], team_id: @team.id, player_cost: @player_costs[index]), class: "btn btn-default disabled"%>
               <% else %>
-                <%= link_to 'Add', new_teams_player_path(player_id: @players[index], team_id: @team.id, player_cost: @player_costs[index]), class: "btn btn-success"%>
-              <% end %> 
-              
-            
+                <%= link_to 'Add', new_teams_player_path(player_id: @players[index], team_id: @team.id, player_cost: @player_costs[index], position: @filter), class: "btn btn-success"%>
+              <% end %>
+
+
             </td>
           </tr>
+          <% end %>
           <% end %>
 
         </tbody>
@@ -108,7 +106,7 @@
           </thead>
           <% if @team.league.cost > current_user.balance %>
             <div style="color: red">Cost: <%=number_to_currency @team.league.cost %></div>
-          <% else %> 
+          <% else %>
             Cost: <%=number_to_currency @team.league.cost %>
           <% end %>
           <tbody>
@@ -126,7 +124,7 @@
               <td>
                 <%= number_to_currency(@my_player_costs[index], precision: 0) %>
               </td>
-              <td><%= link_to 'Remove', edit_team_path(id: @team.id, player_id: @my_players[index]) %></td>
+              <td><%= link_to 'Remove', edit_team_path(id: @team.id, player_id: @my_players[index], position: @filter) %></td>
 
             </tr>
             <% end %>
@@ -134,7 +132,7 @@
 
         </table>
       </div>
-      
+
       <% if @my_players.size == 5 %>
       <% if @team.league.cost > current_user.balance %>
       <!-- Button trigger modal -->
@@ -176,5 +174,3 @@ $(document).ready(function () {
 });
 
 </script>
-
-

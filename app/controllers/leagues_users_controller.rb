@@ -24,7 +24,7 @@ class LeaguesUsersController < ApplicationController
 
       respond_to do |format|
         if @leagues_user.save
-          format.html { redirect_to @league, notice: 'Leagues user was successfully created.' }
+          format.html { redirect_to @league}
           format.json { render :show, status: :created, location: @leagues_user }
         else
           format.html { render :new }
