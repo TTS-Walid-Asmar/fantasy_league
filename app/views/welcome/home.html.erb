@@ -39,11 +39,15 @@
         <%= league.start_time.strftime('%a %b %e %I:%M %p %Z') %>
       </td>
       <td>
+        <% if league.users.include?(current_user)%>
+          <%= link_to "Show", league, class: "btn btn-primary"%>
+        <% else %>
           <% if league.cost > current_user.balance %>
             <%= link_to "Enter", league, class: "btn btn-primary", style: "border: 1px solid red"%>
           <% else %>
             <%= link_to "Enter", league, class: "btn btn-primary" %>
           <% end %>
+        <% end %>
       </td>
     </tr>
     <% end %>
