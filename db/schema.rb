@@ -48,8 +48,8 @@ ActiveRecord::Schema.define(version: 20150930140511) do
     t.datetime "image_updated_at"
     t.text     "games"
     t.text     "player_list"
-    t.integer  "tournament_id"
     t.string   "slug"
+    t.integer  "tournament_id"
     t.integer  "fantasy_stat_id"
   end
 
@@ -94,8 +94,8 @@ ActiveRecord::Schema.define(version: 20150930140511) do
     t.datetime "image_updated_at"
     t.integer  "league_id"
     t.integer  "user_id"
-    t.text     "player_list"
     t.string   "slug"
+    t.text     "player_list"
   end
 
   add_index "teams", ["slug"], name: "index_teams_on_slug", unique: true
