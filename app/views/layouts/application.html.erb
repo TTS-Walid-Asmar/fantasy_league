@@ -111,7 +111,7 @@
             </ul>
           </li>
           <li><a href="#">|</a></li>
-          <li><a href= <%= new_charge_path + "?amount=50" %>><%= number_to_currency current_user.balance %></a></li>
+          <li><a href= <%= new_charge_path(amount: 50, path: request.original_url) %>><%= number_to_currency current_user.balance %></a></li>
           <!-- <li class="user-balance">
           <div id="balance" class="balance-header" style="padding-top:25%;" >
           <%= number_to_currency current_user.balance %> | </div>

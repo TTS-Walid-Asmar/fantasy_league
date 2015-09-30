@@ -110,6 +110,8 @@ class TeamsController < ApplicationController
   # DELETE /teams/1.json
   def destroy
     @team.league.users.delete(current_user)
+    @team.user.balance += @team.league.cost
+    @team.user.save
     @team.destroy
 
     respond_to do |format|
