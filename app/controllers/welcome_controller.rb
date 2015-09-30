@@ -29,11 +29,11 @@ class WelcomeController < ApplicationController
   end
 
   def withdraw
-  
+    @amount = (params[:amount].to_f)
   end
   
   def withdrawn
-  
+    
     @amount = (params[:amount].to_f)
     if current_user.balance >= @amount
       current_user.balance -= @amount

@@ -175,6 +175,7 @@ class FantasyStat < ActiveRecord::Base
 
 
       est_cost = ((ppg-avg)*200+average_cost_per_player).round(-2)
+
       costs.push(est_cost)
     end
     return costs

@@ -45,25 +45,21 @@
   </div>
   <p>Make sure you read the Terms & Conditions before signing up! </p>
 
-<<<<<<< HEAD
-  <div class="actions">
-    <%= f.submit "Sign up!", class: "btn btn-info", notice: 'Check your email for the confirmation email we just sent you.  Please click on the link within the email and then you will be able to sign in.  Until then you will not be able to sign in. ' %>
-    
-=======
+
   <p>
   <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-6">
       <%= link_to "Terms & Conditions", "#myModal", :class => "btn btn-success", "data-toggle" => "modal" %>
     </div>
     <div class="col-md-6 text-right">
-      <%= f.submit "Sign up!", class: "btn btn-primary" %>
+      <%= f.submit "Sign up!", class: "btn btn-primary", style: "width: 124px" %>
     </div>
->>>>>>> a90a0b5222f4de08ee78d110833800e589ac78f1
   </div>
 <% end %>
-
+<br>
+<div class="form-group">
 <%= render "devise/shared/links" %>
-
+</div>
 
  <!-- Modal -->
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
