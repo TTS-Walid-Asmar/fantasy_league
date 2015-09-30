@@ -10,7 +10,7 @@
     <p>To play Fantasy League you need to have funds in your account. </p>
     <p>Don't worry, you can <%= link_to "withdraw", withdraw_path %> your money at any time for free.  </p>
     <p>How much would you like to add? </p>
-    <p>    
+    <p>
       <div class="col-md-6">
         <%= form_tag charges_path do %>
           <strong><%= number_to_currency @amount %></strong>
@@ -19,14 +19,14 @@
             <%= number_field_tag :amount, @amount %>
             <%= text_field_tag :path, @path %>
           </div>
-          <script 
+          <script
                   src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                   data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
                   data-description=  "Adding Funds!"
-                  
+
                   data-amount= <%= (@amount.to_f.round(2) * 100).to_i %>
                   data-locale="auto">
-            
+
           </script>
         <% end %>
         </div>

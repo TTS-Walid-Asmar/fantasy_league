@@ -27,7 +27,7 @@ class TeamsPlayersController < ApplicationController
 
       @team.player_list.push(@player_id)
       @team.save
-      redirect_to team_path(id: @team.id, position: params[:position])
+      redirect_to team_path(id: @team.friendly_id, position: params[:position])
     else
       flash[:notice] = "Sorry this player could not be added."
 

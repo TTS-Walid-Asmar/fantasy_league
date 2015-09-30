@@ -1,3 +1,9 @@
+
+<% if @team.league.cost > current_user.balance %>
+<h1><%= @team.league.name %> - <span style="color: red"><%= number_to_currency(@team.league.cost, precision: 0) %></span></h1>
+<% else %>
+  <h1><%= @team.league.name %> - <span><%= number_to_currency(@team.league.cost, precision: 0) %></span></h1>
+<% end %>
 <div class="row">
   <div class="col-md-6">
     <ul class="nav nav-tabs">
@@ -108,11 +114,6 @@
               </caption>
             </tr>
           </thead>
-          <% if @team.league.cost > current_user.balance %>
-            <div style="color: red">Cost: <%=number_to_currency @team.league.cost %></div>
-          <% else %>
-            Cost: <%=number_to_currency @team.league.cost %>
-          <% end %>
           <tbody>
             <% @my_players.each_index do |index|%>
             <tr>
@@ -142,7 +143,7 @@
       </div>
 
       <% if @my_players.size == 5 %>
-      <% if @team.league.cost > current_user.balance %>
+      <% if @needed_money > 0 %>
       <!-- Button trigger modal -->
       <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">
         Enter
@@ -157,12 +158,12 @@
               <h4 class="modal-title" id="myModalLabel">Oops!</h4>
             </div>
             <div class="modal-body">
-              You don't have enough funds in your account to enter this league. Would you like to add <%= number_to_currency(@team.league.cost - current_user.balance) %>
+              You don't have enough funds in your account to enter this league. Would you like to add <%= number_to_currency(@needed_money) %>
               so that you will be able to enter?
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <%= link_to "Add Funds", new_charge_path(amount: (@team.league.cost - current_user.balance), path: request.original_url), class: "btn btn-success" %>
+              <%= link_to "Add Funds", new_charge_path(amount: @needed_money, path: request.original_url), class: "btn btn-success" %>
             </div>
           </div>
         </div>

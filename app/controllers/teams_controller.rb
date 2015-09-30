@@ -11,29 +11,29 @@ class TeamsController < ApplicationController
   # GET /teams/1.json
   def show
 
-   @my_players = @team.player_list
-   @players = @team.league.player_list.reject {|player_id| @my_players.include?(player_id)}
-   @playerlist_ppg = @team.league.fantasy_stat.find_player_ppgs(@team.league.player_list)
-   @playernames = @team.league.fantasy_stat.find_player_names(@players)
-   @player_roles = @team.league.fantasy_stat.find_player_roles(@players)
-   @player_ppg = @team.league.fantasy_stat.find_player_ppgs(@players)
+    @my_players = @team.player_list
+    @players = @team.league.player_list.reject {|player_id| @my_players.include?(player_id)}
+    @playerlist_ppg = @team.league.fantasy_stat.find_player_ppgs(@team.league.player_list)
+    @playernames = @team.league.fantasy_stat.find_player_names(@players)
+    @player_roles = @team.league.fantasy_stat.find_player_roles(@players)
+    @player_ppg = @team.league.fantasy_stat.find_player_ppgs(@players)
 
 
-   @player_avg = @team.league.fantasy_stat.player_ppg_average(@playerlist_ppg)
-   @player_costs = @team.league.fantasy_stat.find_player_costs(@player_avg, @player_ppg)
+    @player_avg = @team.league.fantasy_stat.player_ppg_average(@playerlist_ppg)
+    @player_costs = @team.league.fantasy_stat.find_player_costs(@player_avg, @player_ppg)
 
-   @filter = params[:position]
-   @filter_array = ["Top Lane", "AD Carry", "Mid Lane", "Support", "Jungler"]
-   if @filter != nil && @filter != "All"
-     @filter_array =[params[:position]]
-   end
+    @filter = params[:position]
+    @filter_array = ["Top Lane", "AD Carry", "Mid Lane", "Support", "Jungler"]
+    if @filter != nil && @filter != "All"
+      @filter_array =[params[:position]]
+    end
 
 
 
-   @my_playernames = @team.league.fantasy_stat.find_my_player_names(@my_players)
-   @my_player_roles = @team.league.fantasy_stat.find_player_roles(@my_players)
-   @my_player_ppg = @team.league.fantasy_stat.find_player_ppgs(@my_players)
-   @my_player_costs = @team.league.fantasy_stat.find_player_costs(@player_avg, @my_player_ppg)
+    @my_playernames = @team.league.fantasy_stat.find_my_player_names(@my_players)
+    @my_player_roles = @team.league.fantasy_stat.find_player_roles(@my_players)
+    @my_player_ppg = @team.league.fantasy_stat.find_player_ppgs(@my_players)
+    @my_player_costs = @team.league.fantasy_stat.find_player_costs(@player_avg, @my_player_ppg)
 
 
 
@@ -41,7 +41,7 @@ class TeamsController < ApplicationController
     sum = 0
 
     @my_player_costs.each do |cost|
-        sum += cost
+      sum += cost
     end
 
     @salary_remaining = 50000 - sum
@@ -54,7 +54,10 @@ class TeamsController < ApplicationController
     else
       @average_cost_per_player = 0
     end
-
+    @needed_money = @team.league.cost - current_user.balance
+    if @needed_money > 0 && @needed_money < 10
+      @needed_money = 10
+    end
 
   end
 

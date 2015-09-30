@@ -29,8 +29,7 @@ class FantasyStat < ActiveRecord::Base
     time = Time.now
     parsed.each do |tourney, value|
       tournament_ids[(tourney.gsub('tourney', ''))] = time
-      time += 2.minutes
-      # time += 2.days
+      time += 6.hours
     end
     self.tournaments = tournament_ids
     self.save
@@ -50,16 +49,19 @@ class FantasyStat < ActiveRecord::Base
     time = self.tournaments[tournament_id]
     response['playerStats'].each do |game, values|
       values['dateTime'] = time
-      # time += 2.hours
+      time += 1.hours
     end
     return response
   end
 
   def create_leagues
+    counter = 0
     self.tournaments.each do |tourney, time|
       game_list = create_tourn_game_list(tourney)
+
       while game_list.count > 0
         league = League.new
+        counter +=1
         league.tournament_id = tourney
         league.start_time = time
         league.games = game_list.slice!(0..10)
@@ -68,7 +70,7 @@ class FantasyStat < ActiveRecord::Base
         league.cost = rand(0..100)
         league.fantasy_stat_id = self.id
         league.player_list = create_player_list_and_ppg(tourney, league.games)
-        league.name = "Test"
+        league.name = "League " + counter.to_s + " " +  league.start_time.strftime('%D')
         league.save
 
       end
