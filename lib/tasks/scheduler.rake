@@ -9,7 +9,7 @@ task :update_league_status => :environment do
         league.save
       end
     else
-      if league.start_time <= Time.now
+      if (league.start_time + 10.minutes) <= Time.now
         league.process_league
       end
     end
