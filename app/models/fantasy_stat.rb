@@ -29,7 +29,7 @@ class FantasyStat < ActiveRecord::Base
     time = Time.now
     parsed.each do |tourney, value|
       tournament_ids[(tourney.gsub('tourney', ''))] = time
-      time += 2.hours
+      time += 5.minutes
     end
     self.tournaments = tournament_ids
     self.save
@@ -49,7 +49,7 @@ class FantasyStat < ActiveRecord::Base
     time = self.tournaments[tournament_id]
     response['playerStats'].each do |game, values|
       values['dateTime'] = time
-      time += 1.hours
+      time += 2.minutes
     end
     return response
   end
