@@ -3,7 +3,7 @@ task :update_league_status => :environment do
   puts "Updating league statuses.."
   leagues = League.where.not(status: "Past")
   leagues.each do |league|
-    if league.status = "Upcoming"
+    if league.status == "Upcoming"
       if league.start_time <= Time.now
         league.status = "Live"
         league.save
